@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    primary - #600b10
+    dark - #be0000
+    accent - #cdcdcd
+    -->
+    <color name="colorPrimary">#950000</color>
+    <color name="colorPrimaryDark">#660000</color>
+    <color name="colorPrimaryLight">#ffb300</color>
+    <color name="TextInPrimary">#ffffff</color>
+    <color name="TextInPrimaryLight">#000000</color>
+    <color name="Facebook_blue">#3b5998</color>
+
+    <color name="Pomegranate">#c0392b</color>
+    <color name="Alizarin">#e74c3c</color>
+
+    <color name="colorAccent">#990000</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="buttonlogin">#ffb300</color>
+    <color name="listcolor">#f8f8f8</color>
+    <color name="SignUpText">#757575</color>
+    <color name="grey">#757575</color>
+    <color name="blue_btn_bg_color">#1976d2</color>
+    <color name="blue_btn_bg_pressed_color">#1565C0</color>
+    <!--Grey = #e7e7e7-->
+    <color name="white">#ffffff</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="colortext_comentario">#b7b9b4</color>
+    <color name="colorbackground_comentario">#f8f8f8</color>
+    <color name="shadow">#e8e8e8</color>
+    <color name="dark_text">#161928</color>
+    <color name="date_color">#d0d0d0</color>
+    <color name="comentario_text_color">#484848</color>
+
+
+
+</resources>

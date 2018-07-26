@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Alertas"
+            android:icon="@drawable/ic_menu_atencion"
+            android:title="Alertas" />
+        <item
+            android:id="@+id/Alertar_Ciudadania"
+            android:icon="@drawable/ic_menu_alert"
+            android:title="Alertar Ciudadania"
+            />
+        <item
+            android:id="@+id/Danos_tu_reporte"
+            android:icon="@drawable/ic_menu_atention"
+            android:title="Danos tu Reporte" />
+        <item
+            android:id="@+id/FacturaElectronica"
+            android:icon="@drawable/ic_menu_facturaelectronica"
+            android:title="Facturacíon Electronica" />
+        <item
+            android:id="@+id/consulta_predial"
+            android:icon="@drawable/ic_menu_predial"
+            android:title="Consulta Predial" />
+        <item
+            android:id="@+id/noticias"
+            android:icon="@drawable/ic_menu_noticia"
+            android:title="Noticias" />
+        <item
+            android:id="@+id/Turismo"
+            android:icon="@drawable/ic_menu_turismo"
+            android:title="Zonas Turisticas" />
+        <item
+            android:id="@+id/CoAlcalde"
+            android:icon="@drawable/ic_menu_alcalde"
+            android:title="Conoce a tu Alcalde" />
+        <item
+            android:id="@+id/NumEmergencia"
+            android:icon="@drawable/ic_menu_emergencia"
+            android:title="Numeros de Emergencia" />
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/cerrar_Sesion"
+                    android:icon="@drawable/ic_menu_logout"
+                    android:title="Cerrar Sesión" />
+            </menu>
+        </item>
+
+    </group>
+<!--
+
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
+-->
+</menu>

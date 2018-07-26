@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "813229968568",
+    "firebase_url": "https://simacf-e1fe8.firebaseio.com",
+    "project_id": "simacf-e1fe8",
+    "storage_bucket": "simacf-e1fe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813229968568:android:236614c85cb0c6b5",
+        "android_client_info": {
+          "package_name": "com.example.josel.apptest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813229968568-cimtfedg4l7eajeacif971hqjei58n62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG8ImplTed3PWlkWxMR9-YWn0P9g5stoM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

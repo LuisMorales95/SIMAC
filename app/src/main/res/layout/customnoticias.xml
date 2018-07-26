@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/noticiaescudo"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:src="@drawable/wait"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />-->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/noticiaescudo"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:scaleType="fitXY"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp"
+                tools:layout_editor_absoluteX="387dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <!--<ImageView
+                android:id="@+id/noticiaimg"
+                android:layout_width="367dp"
+                android:layout_height="240dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="80dp"
+                android:background="@android:color/background_light"
+                android:src="@drawable/wait"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />-->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/noticiaimg"
+                android:layout_width="0dp"
+                android:layout_height="280dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--android:scaleType="fitXY"-->
+
+            <TextView
+                android:id="@+id/noticiatit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textColor="@color/title_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noticiaimg" />
+
+            <TextView
+                android:id="@+id/noticiausuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="TextView"
+                android:textColor="@color/comentario_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noticiatit" />
+
+            <ImageView
+                android:id="@+id/image_user"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/noticiausuario"
+                app:layout_constraintStart_toEndOf="@+id/noticiausuario"
+                app:layout_constraintTop_toTopOf="@+id/noticiausuario"
+                app:srcCompat="@drawable/ic_menu_accountsignup" />
+
+            <TextView
+                android:id="@+id/noticiafecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="TextView"
+                android:textColor="@color/date_color"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/noticiausuario"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/noticiausuario" />
+
+            <TextView
+                android:id="@+id/noticiades"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                android:text="TextView"
+
+
+                android:textColor="@color/comentario_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/noticiaubicacion"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/date_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/clickAlert"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view12"
+                android:layout_width="0dp"
+                android:layout_height="2px"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/SignUpText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clickAlert" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="2px"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/SignUpText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view12" />
+
+            <TextView
+                android:id="@+id/txt_megusta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Me Gusta"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/view8"
+                app:layout_constraintEnd_toStartOf="@+id/view8"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view8" />
+
+            <ImageView
+                android:id="@+id/MeGusta"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:paddingBottom="7dp"
+                android:paddingRight="75dp"
+                android:paddingTop="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view8"
+                app:srcCompat="@drawable/ic_menu_like_gray" />
+
+            <TextView
+                android:id="@+id/txt_comentar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:text="Comentar"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/view8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toEndOf="@+id/view8"
+                app:layout_constraintTop_toTopOf="@+id/view8" />
+
+            <ImageView
+                android:id="@+id/Comentar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:paddingBottom="7dp"
+                android:paddingRight="75dp"
+                android:paddingTop="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view8"
+                app:layout_constraintTop_toTopOf="@+id/view8"
+                app:srcCompat="@drawable/ic_menu_comment_gray" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
