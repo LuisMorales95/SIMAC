@@ -53,7 +53,7 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.josel.apptest.Activitys.Activity_Maps;
 import com.example.josel.apptest.Activitys.Activity_Main;
-import com.example.josel.apptest.Methods.AppController;
+import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
 
@@ -125,7 +125,7 @@ public class Fragment_AlertC extends Fragment {
     EditText edittxtdes, txttitalerta;
     ImageButton btnubicar, alertcamara, alertgallery;
     ImageButton btnenviaraviso;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
     double latitude, longitude;
     SharedPreferences preferences;
     String id_preferencia;
@@ -206,7 +206,7 @@ public class Fragment_AlertC extends Fragment {
         btnenviaraviso = (ImageButton) getView().findViewById(R.id.btnenviaraviso);
 
         // ESCUDO
-        imageLoader = AppController.getInstance().getImageLoader();
+        imageLoader = VolleySingleton.getInstance().getImageLoader();
 
         //new GetImagesURL(imgescudoalerta).execute(UserData.Escudo);
 

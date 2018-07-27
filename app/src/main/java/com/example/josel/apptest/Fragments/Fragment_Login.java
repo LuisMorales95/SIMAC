@@ -367,7 +367,7 @@ public class Fragment_Login extends Fragment {
                 Activity_Main.navigationView.getMenu().getItem(0).setChecked(true);
                 getActivity().invalidateOptionsMenu();
                 Activity_Main.ocultar_campos();
-                new UpdateToken(FirebaseInstanceId.getInstance().getToken(), preferences).execute();
+	            new UpdateToken(FirebaseInstanceId.getInstance().getToken()).execute();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.flContent,fragmentAtencionC).addToBackStack(null)                   .commit();
             }else if (aBoolean==2){
                 final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());

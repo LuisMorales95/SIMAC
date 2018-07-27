@@ -209,7 +209,7 @@ public class Activity_Login extends AppCompatActivity {
         protected void onPostExecute(final Boolean result) {
                     if (result){
                         //Snackbar.make(ROOTVIEW,"Exito",Snackbar.LENGTH_LONG).show();
-                        new UpdateToken(FirebaseInstanceId.getInstance().getToken(),PREFERENCIAS).execute();
+	                    new UpdateToken(FirebaseInstanceId.getInstance().getToken()).execute();
                         Intent this_intent = new Intent(activity,Activity_Main.class);
                         activity.startActivity(this_intent);
                         activity.finish();
@@ -281,7 +281,7 @@ public class Activity_Login extends AppCompatActivity {
         protected void onPostExecute(final Boolean result) {
             if (result){
                         Intent open = new Intent(Activity_Login.this,Activity_Main.class);
-                new UpdateToken(FirebaseInstanceId.getInstance().getToken(),preferences).execute();
+	            new UpdateToken(FirebaseInstanceId.getInstance().getToken()).execute();
                         startActivity(open);
                         finish();
                         progress.setVisibility(View.INVISIBLE);

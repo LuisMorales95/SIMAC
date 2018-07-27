@@ -25,7 +25,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.josel.apptest.Activitys.Activity_Main;
 import com.example.josel.apptest.Methods.HTTPPARAMS;
-import com.example.josel.apptest.Methods.AppController;
+import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.Methods.HTMLSimplifier;
 import com.example.josel.apptest.Activitys.Activity_NoticiaMunicipal;
 import com.example.josel.apptest.Objects.NoticiaCiudadana;
@@ -422,7 +422,7 @@ public class Fragment_Noticias extends Fragment {
         private Activity activity;
         private LayoutInflater inflater;
         private List<NoticiaCiudadana> NoticiaCiudadana;
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
         public CustomListAdapter(Activity activity, List<NoticiaCiudadana> NoticiaCiudadana) {
             this.activity = activity;
@@ -457,8 +457,8 @@ public class Fragment_Noticias extends Fragment {
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (convertView == null)
                 convertView = inflater.inflate(R.layout.customnoticiasmunicipales, null);
-
-            if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+    
+            if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
             NetworkImageView municipio_imagen = (NetworkImageView) convertView.findViewById(R.id.municipio_imagen);
             TextView municipio_titulo = (TextView) convertView.findViewById(R.id.municipio_titulo);
             TextView municipio_descripcion = (TextView) convertView.findViewById(R.id.municipio_descripcion);

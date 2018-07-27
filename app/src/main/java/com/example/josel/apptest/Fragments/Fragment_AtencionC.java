@@ -32,7 +32,7 @@ import com.example.josel.apptest.Activitys.Activity_NoticiaIndividual;
 import com.example.josel.apptest.Activitys.Activity_Main;
 import com.example.josel.apptest.Activitys.Activity_Comments;
 import com.example.josel.apptest.Methods.HTTPPARAMS;
-import com.example.josel.apptest.Methods.AppController;
+import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.Objects.NoticiaCiudadana;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
@@ -146,8 +146,8 @@ public class Fragment_AtencionC extends Fragment {
         }
         NoticiaCiudadana_lista = new ArrayList<NoticiaCiudadana>();
         successDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.SUCCESS_TYPE);
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-        if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+	    ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
+	    if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
         Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS+preferences.getString("IMGUSU",""), imageLoader);
 
 
@@ -542,8 +542,8 @@ public class Fragment_AtencionC extends Fragment {
         private Activity activity;
         private List<NoticiaCiudadana> NoticiaCiudadana;
         private LayoutInflater inflater;
-
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+	
+	    ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
         public CustomListAdapter(Activity activity, List<NoticiaCiudadana> NoticiaCiudadana) {
             this.activity = activity;
@@ -577,8 +577,8 @@ public class Fragment_AtencionC extends Fragment {
             if (inflater == null) inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             if (convertView == null) convertView = inflater.inflate(R.layout.customnoticias, null);
-
-            if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+	
+	        if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
 
 
             NetworkImageView  Imageuser = (NetworkImageView) convertView.findViewById(R.id.noticiaescudo);

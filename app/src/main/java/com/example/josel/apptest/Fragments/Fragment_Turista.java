@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.josel.apptest.Methods.AppController;
+import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
 import com.squareup.picasso.Picasso;
@@ -131,7 +131,7 @@ public class Fragment_Turista extends Fragment {
 
         private String[] mDataset;
         private String[] imagenes;
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+	    ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
         public MyAdapter(String[] mDataset, String[] imagenes) {
             this.mDataset = mDataset;
@@ -142,7 +142,7 @@ public class Fragment_Turista extends Fragment {
         public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.turiste_item, parent, false);
-            if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+	        if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
 
             ViewHolder vh = new ViewHolder(itemView);
 

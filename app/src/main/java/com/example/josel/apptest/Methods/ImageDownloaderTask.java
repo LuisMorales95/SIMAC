@@ -30,104 +30,102 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
-
-
-    private final WeakReference<ImageView> imageViewReference;
-
-
-    public ImageDownloaderTask(ImageView imageView) {
-        imageViewReference = new WeakReference<ImageView>(imageView);
-    }
-
-
-    @Override
-    protected Bitmap doInBackground(String... params) {
-        return downloadBitmap(params[0]);
-    }
-
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-
-        if (isCancelled()) {
-            bitmap = null;
-        }
-        if (imageViewReference != null) {
-            ImageView imageView = imageViewReference.get();
-            if (imageView != null) {
-                if (bitmap != null) {
-                    imageView.setImageBitmap(bitmap);
-                } else {
-                    Drawable placeholder = imageView.getContext().getResources().getDrawable(R.drawable.wait);
-                    imageView.setImageDrawable(placeholder);
-                }
-            }
-        }
-    }
-
-
-    public boolean validarusuario(String user, String pass){
-        HttpClient httpc = new DefaultHttpClient();
-        HttpContext localc = new BasicHttpContext();
-        HttpPost httppost = new HttpPost("http://clothinglinestore.esy.es/consultarUsuario.php");
-        HttpResponse response = null;
-        String res = null;
-        try {
-
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("usu", user));
-            params.add(new BasicNameValuePair("contra", pass));
-            httppost.setEntity(new UrlEncodedFormEntity(params));
-
-            response = httpc.execute(httppost, localc);
-            HttpEntity entity = response.getEntity();
-            res = EntityUtils.toString(entity, "UTF-8");
-
-            JSONArray jsonArray = new JSONArray(res);
-            /**
-            String Contrasena = jsonArray.getJSONObject(0).getString("Contrasenna");
-            id = jsonArray.getJSONObject(0).getString("id_usuario");
-            Nombre = jsonArray.getJSONObject(0).getString("Nombre");
-            App = jsonArray.getJSONObject(0).getString("Ap_paterno");
-            Apm = jsonArray.getJSONObject(0).getString("Ap_materno");
-            if(Contrasena.equals(pass)){
-                Almacen_de_datos.id=id;
-                Almacen_de_datos.nom=Nombre;
-                Almacen_de_datos.app=App;
-                Almacen_de_datos.apm=Apm;
-                return true;
-            }**/
-        }catch (Exception e){
-        }
-        return false;
-    }
-
-
-
-    private Bitmap downloadBitmap(String url) {
-        HttpURLConnection urlConnection = null;
-        try {
-            URL uri = new URL(url);
-            urlConnection = (HttpURLConnection) uri.openConnection();
-            int statusCode = urlConnection.getResponseCode();
-            if (statusCode != 200) {
-                return null;
-            }
-            InputStream inputStream = urlConnection.getInputStream();
-            if (inputStream != null) {
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                return bitmap;
-            }
-        } catch (Exception e) {
-            urlConnection.disconnect();
-            Log.w("ImageDownloader", "Error downloading image from " + url);
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-        }
-        return null;
-    }
-
-
-
+	
+	
+	private final WeakReference<ImageView> imageViewReference;
+	
+	
+	public ImageDownloaderTask(ImageView imageView) {
+		imageViewReference = new WeakReference<ImageView>(imageView);
+	}
+	
+	
+	@Override
+	protected Bitmap doInBackground(String... params) {
+		return downloadBitmap(params[0]);
+	}
+	
+	@Override
+	protected void onPostExecute(Bitmap bitmap) {
+		
+		if (isCancelled()) {
+			bitmap = null;
+		}
+		if (imageViewReference != null) {
+			ImageView imageView = imageViewReference.get();
+			if (imageView != null) {
+				if (bitmap != null) {
+					imageView.setImageBitmap(bitmap);
+				} else {
+					Drawable placeholder = imageView.getContext().getResources().getDrawable(R.drawable.wait);
+					imageView.setImageDrawable(placeholder);
+				}
+			}
+		}
+	}
+	
+	
+	public boolean validarusuario(String user, String pass) {
+		HttpClient httpc = new DefaultHttpClient();
+		HttpContext localc = new BasicHttpContext();
+		HttpPost httppost = new HttpPost("http://clothinglinestore.esy.es/consultarUsuario.php");
+		HttpResponse response = null;
+		String res = null;
+		try {
+			
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("usu", user));
+			params.add(new BasicNameValuePair("contra", pass));
+			httppost.setEntity(new UrlEncodedFormEntity(params));
+			
+			response = httpc.execute(httppost, localc);
+			HttpEntity entity = response.getEntity();
+			res = EntityUtils.toString(entity, "UTF-8");
+			
+			JSONArray jsonArray = new JSONArray(res);
+			/**
+			 String Contrasena = jsonArray.getJSONObject(0).getString("Contrasenna");
+			 id = jsonArray.getJSONObject(0).getString("id_usuario");
+			 Nombre = jsonArray.getJSONObject(0).getString("Nombre");
+			 App = jsonArray.getJSONObject(0).getString("Ap_paterno");
+			 Apm = jsonArray.getJSONObject(0).getString("Ap_materno");
+			 if(Contrasena.equals(pass)){
+			 Almacen_de_datos.id=id;
+			 Almacen_de_datos.nom=Nombre;
+			 Almacen_de_datos.app=App;
+			 Almacen_de_datos.apm=Apm;
+			 return true;
+			 }**/
+		} catch (Exception e) {
+		}
+		return false;
+	}
+	
+	
+	private Bitmap downloadBitmap(String url) {
+		HttpURLConnection urlConnection = null;
+		try {
+			URL uri = new URL(url);
+			urlConnection = (HttpURLConnection) uri.openConnection();
+			int statusCode = urlConnection.getResponseCode();
+			if (statusCode != 200) {
+				return null;
+			}
+			InputStream inputStream = urlConnection.getInputStream();
+			if (inputStream != null) {
+				Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+				return bitmap;
+			}
+		} catch (Exception e) {
+			urlConnection.disconnect();
+			Log.w("ImageDownloader", "Error downloading image from " + url);
+		} finally {
+			if (urlConnection != null) {
+				urlConnection.disconnect();
+			}
+		}
+		return null;
+	}
+	
+	
 }

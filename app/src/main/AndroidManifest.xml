@@ -23,7 +23,7 @@
         tools:replace="android:icon"
     -->
     <application
-        android:name=".Methods.AppController"
+        android:name=".Methods.VolleySingleton"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -63,8 +63,9 @@
         </service>
         <!-- [END firebase_service] -->
 
-        <activity android:name=".Activitys.Activity_NoticiaMunicipal"
-            android:screenOrientation="portrait"  />
+        <activity
+            android:name=".Activitys.Activity_NoticiaMunicipal"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -81,32 +82,33 @@
             android:name=".Activitys.Activity_Maps"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activitys.Activity_ImageViewer"
+        <activity
+            android:name=".Activitys.Activity_ImageViewer"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activitys.Activity_Comments"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".Activitys.Activity_Privilegios"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".Activitys.Activity_SubirNumEmergencia"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".Activitys.Activity_Notificacion"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".Activitys.Activity_Get_PhoneNum"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".Activitys.Activity_Get_ValidationCode"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -117,6 +119,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-    </application>
 
+    </application>
 </manifest>

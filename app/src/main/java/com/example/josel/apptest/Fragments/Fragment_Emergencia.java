@@ -31,7 +31,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.josel.apptest.Activitys.Activity_Main;
 import com.example.josel.apptest.Activitys.Activity_SubirNumEmergencia;
 import com.example.josel.apptest.Methods.HTTPPARAMS;
-import com.example.josel.apptest.Methods.AppController;
+import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.Objects.Numero_Emergencia;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.josel.apptest.Methods.SharedPreference.GETSharedPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -134,8 +135,8 @@ public class Fragment_Emergencia extends Fragment {
 
 
         new getEmergencyNumber(Numero_Emergencia_list).execute();
-
-        if (Activity_Main.preferences.getString("Rol", "").equals("3")) {
+	
+	    if (GETSharedPreferences("Rol", "").equals("3")) {
             EmergencyAdd.setVisibility(View.VISIBLE);
             EmergencyAdd.setClickable(true);
             EmergencyAdd.setOnClickListener(new View.OnClickListener() {
@@ -308,7 +309,7 @@ public class Fragment_Emergencia extends Fragment {
         private Activity activity;
         private LayoutInflater inflater;
         private List<Numero_Emergencia> NumeroEmergencia;
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+	    ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
         public CustomListAdapter(Activity activity, List<Numero_Emergencia> NumeroEmergencia) {
             this.activity = activity;
@@ -338,8 +339,8 @@ public class Fragment_Emergencia extends Fragment {
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (convertView == null)
                 convertView = inflater.inflate(R.layout.itememergencia, null);
-
-            if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+	
+	        if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
             NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.emerthumbnail);
             TextView title = (TextView) convertView.findViewById(R.id.emertitle);
             TextView numero = (TextView) convertView.findViewById(R.id.emernumber);
