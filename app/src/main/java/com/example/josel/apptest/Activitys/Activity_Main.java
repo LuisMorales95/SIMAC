@@ -52,6 +52,7 @@ import com.example.josel.apptest.Fragments.Fragment_Predial;
 import com.example.josel.apptest.Fragments.Fragment_Reportar;
 import com.example.josel.apptest.Fragments.Fragment_Reporte;
 import com.example.josel.apptest.Fragments.Fragment_Turista;
+import com.example.josel.apptest.Methods.GenericDialogs;
 import com.example.josel.apptest.Methods.HTTPPARAMS;
 import com.example.josel.apptest.Methods.UpdateToken;
 import com.example.josel.apptest.Methods.VolleySingleton;
@@ -188,13 +189,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					.setIcon(android.R.drawable.ic_dialog_alert)
 					.setTitle("Cerrando Aplicacion")
 					.setMessage("Desea cerrar la aplicación?")
-					.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							finish();
-						}
-						
-					})
+					.setPositiveButton("Si", (dialog, which) -> finish())
 					.setNegativeButton("No", null)
 					.show();
 			//          super.onBackPressed();
@@ -234,144 +229,129 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 	@Override
 	public boolean onNavigationItemSelected(final MenuItem item) {
 		final int id = item.getItemId();
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				// Handle navigation view item clicks here.
-				Fragment fragment = null;
-				Class fragmenteclass = null;
+		new Handler().postDelayed(() -> {
+			// Handle navigation view item clicks here.
+			Fragment fragment = null;
+			Class fragmenteclass = null;
+			
+			if (id == R.id.Alertas) {
+				fragmenteclass = Fragment_AtencionC.class;
+				getSupportActionBar().setTitle(item.getTitle());
 				
-				if (id == R.id.Alertas) {
-					fragmenteclass = Fragment_AtencionC.class;
-					getSupportActionBar().setTitle(item.getTitle());
-					
-				} else if (id == R.id.Alertar_Ciudadania) {
+			} else if (id == R.id.Alertar_Ciudadania) {
 //                    fragmenteclass = Fragment_AlertC.class;
-					if (!GETSharedPreferences("TOKEN", "").isEmpty()) {
-						fragmenteclass = Fragment_AlertC.class;
-						getSupportActionBar().setTitle(item.getTitle());
-					} else {
-						Snackbar.make(getCurrentFocus(), "Necesita Iniciar sesión", Snackbar.LENGTH_SHORT).show();
-					}
-				} else if (id == R.id.Danos_tu_reporte) {
-					if (!GETSharedPreferences("TOKEN", "").isEmpty()) {
-						fragmenteclass = Fragment_Reporte.class;
-						
-						getSupportActionBar().setTitle(item.getTitle());
-					} else {
-						Snackbar.make(getCurrentFocus(), "Necesita Iniciar sesión", Snackbar.LENGTH_SHORT).show();
-					}
-				} else if (id == R.id.FacturaElectronica) {
-					fragmenteclass = Fragment_Empty.class;
+				if (!GETSharedPreferences("TOKEN", "").isEmpty()) {
+					fragmenteclass = Fragment_AlertC.class;
 					getSupportActionBar().setTitle(item.getTitle());
+				} else {
+					Snackbar.make(getCurrentFocus(), "Necesita Iniciar sesión", Snackbar.LENGTH_SHORT).show();
+				}
+			} else if (id == R.id.Danos_tu_reporte) {
+				if (!GETSharedPreferences("TOKEN", "").isEmpty()) {
+					fragmenteclass = Fragment_Reporte.class;
+					
+					getSupportActionBar().setTitle(item.getTitle());
+				} else {
+					Snackbar.make(getCurrentFocus(), "Necesita Iniciar sesión", Snackbar.LENGTH_SHORT).show();
+				}
+			} else if (id == R.id.FacturaElectronica) {
+				fragmenteclass = Fragment_Empty.class;
+				getSupportActionBar().setTitle(item.getTitle());
 //                    fragmenteclass = Fragment_FacturaE.class;
-				
-				} else if (id == R.id.consulta_predial) {
+			
+			} else if (id == R.id.consulta_predial) {
 
 //                    fragmenteclass = Fragment_Predial.class;
-					fragmenteclass = Fragment_Empty.class;
-					getSupportActionBar().setTitle(item.getTitle());
-					
-				} else if (id == R.id.noticias) {
-					
-					fragmenteclass = Fragment_Noticias.class;
-					getSupportActionBar().setTitle(item.getTitle());
-					
-				} else if (id == R.id.Turismo) {
-					
-					fragmenteclass = Fragment_Turista.class;
-					getSupportActionBar().setTitle(item.getTitle());
-					
-				} else if (id == R.id.CoAlcalde) {
-					
-					fragmenteclass = Fragment_Empty.class;
-					getSupportActionBar().setTitle(item.getTitle());
+				fragmenteclass = Fragment_Empty.class;
+				getSupportActionBar().setTitle(item.getTitle());
+				
+			} else if (id == R.id.noticias) {
+				
+				fragmenteclass = Fragment_Noticias.class;
+				getSupportActionBar().setTitle(item.getTitle());
+				
+			} else if (id == R.id.Turismo) {
+				
+				fragmenteclass = Fragment_Turista.class;
+				getSupportActionBar().setTitle(item.getTitle());
+				
+			} else if (id == R.id.CoAlcalde) {
+				
+				fragmenteclass = Fragment_Empty.class;
+				getSupportActionBar().setTitle(item.getTitle());
 //                    fragmenteclass = Fragment_Alcalde.class;
+			
+			} else if (id == R.id.NumEmergencia) {
+				getSupportActionBar().setTitle(item.getTitle());
+				fragmenteclass = Fragment_Emergencia.class;
 				
-				} else if (id == R.id.NumEmergencia) {
-					getSupportActionBar().setTitle(item.getTitle());
-					fragmenteclass = Fragment_Emergencia.class;
-					
-				} else if (id == R.id.cerrar_Sesion) {
-					final int[] option = {0};
+			} else if (id == R.id.cerrar_Sesion) {
+				final int[] option = {0};
 //                    if (preferences.getString("TOKEN","").equals("")){
-					DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							switch (which) {
-								case DialogInterface.BUTTON_POSITIVE:
-									new UpdateToken("").execute();
-									final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Activity_Main.this);
-									builder.setMessage("¡Has cerrado tu sesion exitosamente! \n   Te esperamos pronto. ")
-											.setTitle("Estado")
-											.setCancelable(false)
-											.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialogInterface, int i) {
-                                                        /*SharedPreferences.Editor editor = preferences.edit();
-                                                        editor.putString("TOKEN", "");
-                                                        editor.putString("IMGUSU", "");
-                                                        editor.putString("ID", "");
-                                                        editor.putString("Nombre", "");
-                                                        editor.putString("Correo", "");
-                                                        editor.putString("Rol", "");
-                                                        editor.apply();*/
-													SETSharedPreferences("TOKEN", "");
-													SETSharedPreferences("IMGUSU", "");
-													SETSharedPreferences("ID", "");
-													SETSharedPreferences("Nombre", "");
-													SETSharedPreferences("Correo", "");
-													SETSharedPreferences("Rol", "");
-													
-													invalidateOptionsMenu();
-													ocultar_campos();
-													ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-													if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
-													Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""),
-															imageLoader);
-													Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
-													Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
-													option[0] = 1;
-													Fragment_AtencionC fragmentAtencionC = new Fragment_AtencionC();
-													Activity_Main.this.getSupportFragmentManager().beginTransaction().replace(R.id.flContent, fragmentAtencionC).addToBackStack(null).commit();
-												}
-											});
-									android.app.AlertDialog dialog1 = builder.create();
-									dialog1.show();
-									break;
-								
-								case DialogInterface.BUTTON_NEGATIVE:
-									//No button clicked
-									break;
-							}
-						}
-					};
-					android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Activity_Main.this);
-					builder.setTitle("Advertencia").setIcon(R.drawable.ic_menu_alerta);
-					builder.setMessage("Su cuenta sera cerrada, \n ¿Desea cerrarla?").setPositiveButton("Si", dialogClickListener)
-							.setNegativeButton("No", dialogClickListener).show();
-					
-					if (option[0] == 1) {
-						fragmenteclass = Fragment_AtencionC.class;
-					}
-				}
-				if (fragmenteclass != null) {
-					try {
-						fragment = (Fragment) fragmenteclass.newInstance();
+				DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+					switch (which) {
+						case DialogInterface.BUTTON_POSITIVE:
+							new UpdateToken("").execute();
+							final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Activity_Main.this);
+							builder.setMessage("¡Has cerrado tu sesion exitosamente! \n   Te esperamos pronto. ")
+									.setTitle("Estado")
+									.setCancelable(false)
+									.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+
+										SETSharedPreferences("TOKEN", "");
+										SETSharedPreferences("IMGUSU", "");
+										SETSharedPreferences("ID", "");
+										SETSharedPreferences("Nombre", "");
+										SETSharedPreferences("Correo", "");
+										SETSharedPreferences("Rol", "");
+										
+										invalidateOptionsMenu();
+										ocultar_campos();
+										ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
+										if (imageLoader == null)
+											imageLoader = VolleySingleton.getInstance().getImageLoader();
+										Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""),
+												imageLoader);
+										Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
+										Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
+										option[0] = 1;
+										Fragment_AtencionC fragmentAtencionC = new Fragment_AtencionC();
+										Activity_Main.this.getSupportFragmentManager().beginTransaction().replace(R.id.flContent, fragmentAtencionC).addToBackStack(null).commit();
+									});
+							android.app.AlertDialog dialog1 = builder.create();
+							dialog1.show();
+							break;
 						
-					} catch (Exception e) {
-						e.printStackTrace();
+						case DialogInterface.BUTTON_NEGATIVE:
+							//No button clicked
+							break;
 					}
-					fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-					
-				}
-				if (item.getItemId() != R.id.cerrar_Sesion) {
-					item.setChecked(true);
-					
-				}
+				};
+				android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Activity_Main.this);
+				builder.setTitle("Advertencia").setIcon(R.drawable.ic_menu_alerta);
+				builder.setMessage("Su cuenta sera cerrada, \n ¿Desea cerrarla?").setPositiveButton("Si", dialogClickListener)
+						.setNegativeButton("No", dialogClickListener).show();
 				
+				if (option[0] == 1) {
+					fragmenteclass = Fragment_AtencionC.class;
+				}
+			}
+			if (fragmenteclass != null) {
+				try {
+					fragment = (Fragment) fragmenteclass.newInstance();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 				
 			}
+			if (item.getItemId() != R.id.cerrar_Sesion) {
+				item.setChecked(true);
+				
+			}
+			
+			
 		}, 450);
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
@@ -445,22 +425,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 		@Override
 		protected void onPostExecute(Integer aBoolean) {
 			if (aBoolean == 0) {
+				
 				progressDialog.dismiss();
 				progressDialog.setMessage("Falla de Conexion, Reinicie");
 				AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Main.this);
 				builder.setMessage("Falla de Conexion!")
-						.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new IniciarApp().execute();
-							}
-						})
-						.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								finish();
-							}
-						});
+						.setPositiveButton("Retry", (dialog, which) -> new IniciarApp().execute())
+						.setNegativeButton("Cancelar", (dialog, which) -> finish());
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
 				
@@ -470,7 +441,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 				setSupportActionBar(toolbar);
 				toolbar.setBackgroundResource(R.drawable.gradient);
-				
 				if (bundle == null) {
 					Fragment fragment = null;
 					Class fragmenteclass = null;
@@ -484,17 +454,18 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					getSupportActionBar().setTitle("Alertas");
 				}
 				ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-				DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+				DrawerLayout drawer = findViewById(R.id.drawer_layout);
 				ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 						Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 				drawer.addDrawerListener(toggle);
 				toggle.syncState();
-				navigationView = (NavigationView) findViewById(R.id.nav_view);
+				navigationView = findViewById(R.id.nav_view);
 				View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-				if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
-				Userimage = (NetworkImageView) headerView.findViewById(R.id.userimage);
-				header_name = (TextView) headerView.findViewById(R.id.header_name);
-				header_email = (TextView) headerView.findViewById(R.id.header_email);
+				if (imageLoader == null)
+					imageLoader = VolleySingleton.getInstance().getImageLoader();
+				Userimage = headerView.findViewById(R.id.userimage);
+				header_name = headerView.findViewById(R.id.header_name);
+				header_email = headerView.findViewById(R.id.header_email);
 				Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
 				header_name.setText(GETSharedPreferences("Nombre", ""));
 				header_email.setText(GETSharedPreferences("Correo", ""));
@@ -511,58 +482,56 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				sweetAlertDialogLog.setContentText("Sesión Iniciada en Otro Dispositivo \n Vuelva a Iniciar Sesión en este equipo");
 				sweetAlertDialogLog.setCancelable(false);
 				sweetAlertDialogLog.show();
-				Button cerrar = (Button) sweetAlertDialogLog.findViewById(cn.pedant.SweetAlert.R.id.confirm_button);
+				Button cerrar = sweetAlertDialogLog.findViewById(cn.pedant.SweetAlert.R.id.confirm_button);
 				if (cerrar != null) {
 					Log.e("Messeage from pdialog", "showErrorMsg: Button view Found yep");
 					cerrar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 					cerrar.setTextColor(getResources().getColor(R.color.TextInPrimary));
 					cerrar.setText(" Esta Bien ");
 				}
-				cerrar.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						SETSharedPreferences("TOKEN", "");
-						SETSharedPreferences("IMGUSU", "");
-						SETSharedPreferences("ID", "");
-						SETSharedPreferences("Nombre", "");
-						SETSharedPreferences("Correo", "");
-						SETSharedPreferences("Rol", "");
-						sweetAlertDialogLog.dismiss();
-						Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-						setSupportActionBar(toolbar);
-						toolbar.setBackgroundResource(R.drawable.gradient);
-						if (bundle == null) {
-							Fragment fragment = null;
-							Class fragmenteclass = null;
-							fragmenteclass = Fragment_AtencionC.class;
-							try {
-								fragment = (Fragment) fragmenteclass.newInstance();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-							getSupportActionBar().setTitle("Alertas");
+				cerrar.setOnClickListener(view -> {
+					SETSharedPreferences("TOKEN", "");
+					SETSharedPreferences("IMGUSU", "");
+					SETSharedPreferences("ID", "");
+					SETSharedPreferences("Nombre", "");
+					SETSharedPreferences("Correo", "");
+					SETSharedPreferences("Rol", "");
+					sweetAlertDialogLog.dismiss();
+					Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+					setSupportActionBar(toolbar);
+					toolbar.setBackgroundResource(R.drawable.gradient);
+					if (bundle == null) {
+						Fragment fragment = null;
+						Class fragmenteclass = null;
+						fragmenteclass = Fragment_AtencionC.class;
+						try {
+							fragment = (Fragment) fragmenteclass.newInstance();
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-						ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-						DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-						ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-								Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-						drawer.addDrawerListener(toggle);
-						toggle.syncState();
-						navigationView = (NavigationView) findViewById(R.id.nav_view);
-						View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-						if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
-						Userimage = (NetworkImageView) headerView.findViewById(R.id.userimage);
-						header_name = (TextView) headerView.findViewById(R.id.header_name);
-						header_email = (TextView) headerView.findViewById(R.id.header_email);
-						Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
-						header_name.setText(GETSharedPreferences("Nombre", ""));
-						header_email.setText(GETSharedPreferences("Correo", ""));
-						navigationView.getMenu().getItem(0).setChecked(true);
-						ocultar_campos();
-						navigationView.setNavigationItemSelectedListener(Activity_Main.this);
-						
+						fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+						getSupportActionBar().setTitle("Alertas");
 					}
+					ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
+					DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+					ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+							Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+					drawer.addDrawerListener(toggle);
+					toggle.syncState();
+					navigationView = findViewById(R.id.nav_view);
+					View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+					if (imageLoader == null)
+						imageLoader = VolleySingleton.getInstance().getImageLoader();
+					Userimage = headerView.findViewById(R.id.userimage);
+					header_name = headerView.findViewById(R.id.header_name);
+					header_email = headerView.findViewById(R.id.header_email);
+					Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+					header_name.setText(GETSharedPreferences("Nombre", ""));
+					header_email.setText(GETSharedPreferences("Correo", ""));
+					navigationView.getMenu().getItem(0).setChecked(true);
+					ocultar_campos();
+					navigationView.setNavigationItemSelectedListener(Activity_Main.this);
+					
 				});
 				
 				
@@ -585,17 +554,18 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					getSupportActionBar().setTitle("Alertas");
 				}
 				ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-				DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+				DrawerLayout drawer = findViewById(R.id.drawer_layout);
 				ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 						Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 				drawer.addDrawerListener(toggle);
 				toggle.syncState();
-				navigationView = (NavigationView) findViewById(R.id.nav_view);
+				navigationView = findViewById(R.id.nav_view);
 				View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-				if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
-				Userimage = (NetworkImageView) headerView.findViewById(R.id.userimage);
-				header_name = (TextView) headerView.findViewById(R.id.header_name);
-				header_email = (TextView) headerView.findViewById(R.id.header_email);
+				if (imageLoader == null)
+					imageLoader = VolleySingleton.getInstance().getImageLoader();
+				Userimage = headerView.findViewById(R.id.userimage);
+				header_name = headerView.findViewById(R.id.header_name);
+				header_email = headerView.findViewById(R.id.header_email);
 				Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
 				header_name.setText(GETSharedPreferences("Nombre", ""));
 				header_email.setText(GETSharedPreferences("Correo", ""));
