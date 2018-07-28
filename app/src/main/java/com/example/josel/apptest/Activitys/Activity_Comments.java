@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.josel.apptest.Fragments.Fragment_AtencionC;
 import com.example.josel.apptest.Methods.HTTPPARAMS;
+import com.example.josel.apptest.Methods.SharedPreference;
 import com.example.josel.apptest.Objects.Comentario;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
@@ -41,6 +42,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.josel.apptest.Methods.SharedPreference.*;
 
 public class Activity_Comments extends AppCompatActivity {
 	public static int commentposition;
@@ -96,7 +99,7 @@ public class Activity_Comments extends AppCompatActivity {
 					Date c = Calendar.getInstance().getTime();
 					SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 					String date = df.format(c);
-					new insertar_comentarios(getCurrentFocus(), String.valueOf(commentposition), Fragment_AtencionC.preferences.getString("ID", ""), comentario_text.getText().toString(), date).execute();
+					new insertar_comentarios(getCurrentFocus(), String.valueOf(commentposition), GETSharedPreferences("ID", ""), comentario_text.getText().toString(), date).execute();
 				}
 				
 			}
@@ -319,7 +322,7 @@ public class Activity_Comments extends AppCompatActivity {
 			comentario_name.setText(comment.getName());
 			comentario_description.setText(comment.getComment());
 			comentario_date.setText(comment.getFecha());
-			if (comment.getId_usuario().equals(Fragment_AtencionC.preferences.getString("ID", ""))) {
+			if (comment.getId_usuario().equals(GETSharedPreferences("ID", ""))) {
 				comentario_trash.setVisibility(View.VISIBLE);
 				comentario_trash.setClickable(true);
 			} else {
