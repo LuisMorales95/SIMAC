@@ -60,7 +60,7 @@ public class Fragment_Login extends Fragment {
     //  TODO: View elements on the fragment
     private Button validarportelefono;
     private final int PHONERQUESTPERCODE = 1002;
-    private String Telefono=null;
+    
 
     // TODO: Variables for the code
     private SharedPreferences preferences;
@@ -149,13 +149,17 @@ public class Fragment_Login extends Fragment {
             if (UserData.Telefono.equals("")){
                 TelephonyManager mTelephonyManager;
                 mTelephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-                Telefono = mTelephonyManager.getLine1Number();
-                if (Telefono.length()!=13){
+                if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
                     startActivityForResult(new Intent(getActivity(),Activity_Get_PhoneNum.class),024);
                 }else{
-                    UserData.Telefono=Telefono;
-                    new telephoneval(UserData.Telefono).execute();
+                    UserData.Telefono = mTelephonyManager.getLine1Number();
+                    if (UserData.Telefono.length()!=13){
+                        startActivityForResult(new Intent(getActivity(),Activity_Get_PhoneNum.class),024);
+                    }else{
+                        new telephoneval(UserData.Telefono).execute();
+                    }
                 }
+                
             }else{
                 new telephoneval(UserData.Telefono).execute();
             }

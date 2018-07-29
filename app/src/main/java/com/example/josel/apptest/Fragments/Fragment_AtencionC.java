@@ -211,7 +211,7 @@ public class Fragment_AtencionC extends Fragment {
                 sweetAlertDialog.setContentText("¿Desea borrar esta publicacion?");
                 sweetAlertDialog.show();
                 sweetAlertDialog.showCancelButton(true);
-                Button cancel = (Button) sweetAlertDialog.findViewById(cn.pedant.SweetAlert.R.id
+                Button cancel = sweetAlertDialog.findViewById(cn.pedant.SweetAlert.R.id
                         .cancel_button);
                 if (cancel != null) {
                     Log.e("Messeage from pdialog", "showErrorMsg: Button view Found yep");
@@ -225,7 +225,7 @@ public class Fragment_AtencionC extends Fragment {
                         sweetAlertDialog.dismiss();
                     }
                 });
-                Button accept = (Button) sweetAlertDialog.findViewById(cn.pedant.SweetAlert.R.id
+                Button accept = sweetAlertDialog.findViewById(cn.pedant.SweetAlert.R.id
                         .confirm_button);
                 if (accept != null) {
                     Log.e("Messeage from pdialog", "showErrorMsg: Button view Found yep");
@@ -233,14 +233,9 @@ public class Fragment_AtencionC extends Fragment {
                     accept.setTextColor(getResources().getColor(R.color.TextInPrimaryLight));
                     accept.setText("Si, Hazlo");
                 }
-                accept.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                accept.setOnClickListener(view -> {
                         sweetAlertDialog.dismiss();
-                        new borrarNoticia(Integer.valueOf(NoticiaCiudadana_lista.get(pos).getId()
-                        ), pos).execute();
-                        
-                    }
+                        new borrarNoticia(Integer.valueOf(NoticiaCiudadana_lista.get(pos).getId()), pos).execute();
                 });
                 //                Toast.makeText(getContext(), "long clicked, "+"pos: " + pos,
                 // Toast.LENGTH_LONG).show();

@@ -304,14 +304,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 										SETSharedPreferences("Nombre", "");
 										SETSharedPreferences("Correo", "");
 										SETSharedPreferences("Rol", "");
+										UserData.Telefono = "";
 										
 										invalidateOptionsMenu();
 										ocultar_campos();
 										ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 										if (imageLoader == null)
 											imageLoader = VolleySingleton.getInstance().getImageLoader();
-										Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""),
-												imageLoader);
+										Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
 										Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
 										Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
 										option[0] = 1;
