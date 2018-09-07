@@ -7,26 +7,30 @@
     tools:context=".Activitys.Activity_Get_ValidationCode">
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView89"
+                android:id="@+id/get_validation_code_validate"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/progress_circle_radius"
                 android:background="@color/shadow"
                 android:gravity="center"
                 android:paddingLeft="@dimen/progress_circle_radius"
                 android:paddingRight="@dimen/progress_circle_radius"
-                android:text="Codigo de Verificación"
+                android:text="Verificación"
                 android:textColor="@color/dark_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -55,28 +59,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="ENVIAR"
+                android:text="Solicitar Codigo"
                 android:textColor="@color/TextInPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/get_validation_code_code" />
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <EditText
                 android:id="@+id/get_validation_code_code"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
 
                 android:background="@drawable/round_editssignup"
                 android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:ems="7"
-                android:hint="..."
+                android:gravity="center"
                 android:inputType="text|textCapCharacters|textCapWords|number"
                 android:maxLength="10"
                 android:paddingBottom="5dp"
@@ -87,7 +91,24 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView91"
-                app:layout_constraintTop_toBottomOf="@+id/textView89" />
+                app:layout_constraintTop_toBottomOf="@+id/get_validation_code_validate" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="Solicite su codigo.\n El codigo automaticamente se tomara, en caso de no ser asi debera ingresar lo manualmente"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/get_validation_code_code" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

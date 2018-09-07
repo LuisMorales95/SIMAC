@@ -58,6 +58,7 @@ import com.example.josel.apptest.Methods.UpdateToken;
 import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -95,6 +96,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 	public static NavigationView navigationView;
 	public static AsyncTask task;
 	public static Activity main;
+	private FirebaseAuth mAuth;
 	FragmentManager fragmentManager = getSupportFragmentManager();
 	private Bundle bundle;
 	
@@ -120,6 +122,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 		setContentView(R.layout.activity_main);
 		main = this;
 		new IniciarApp().execute();
+		mAuth = FirebaseAuth.getInstance();
 	}
 	
 	private void agarrarnuevaimage() {
@@ -305,7 +308,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 										SETSharedPreferences("Correo", "");
 										SETSharedPreferences("Rol", "");
 										UserData.Telefono = "";
-										
+										mAuth.signOut();
 										invalidateOptionsMenu();
 										ocultar_campos();
 										ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
@@ -454,6 +457,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					getSupportActionBar().setTitle("Alertas");
 				}
 				ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
+				
 				DrawerLayout drawer = findViewById(R.id.drawer_layout);
 				ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 						Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -461,8 +465,10 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				toggle.syncState();
 				navigationView = findViewById(R.id.nav_view);
 				View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+				
 				if (imageLoader == null)
 					imageLoader = VolleySingleton.getInstance().getImageLoader();
+				
 				Userimage = headerView.findViewById(R.id.userimage);
 				header_name = headerView.findViewById(R.id.header_name);
 				header_email = headerView.findViewById(R.id.header_email);

@@ -2,6 +2,9 @@ package com.example.josel.apptest.Fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +33,11 @@ import com.example.josel.apptest.Methods.UpdateToken;
 import com.example.josel.apptest.UserData;
 import com.example.josel.apptest.Activitys.Activity_Get_PhoneNum;
 import com.example.josel.apptest.Activitys.Activity_Get_ValidationCode;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.apache.http.HttpEntity;
@@ -43,6 +52,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -64,7 +74,7 @@ public class Fragment_Login extends Fragment {
 
     // TODO: Variables for the code
     private SharedPreferences preferences;
-
+    private FirebaseAuth auth;
     // TODO: Animations
 
 
@@ -91,15 +101,7 @@ public class Fragment_Login extends Fragment {
     public Fragment_Login() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Login.
-     */
+    
     // TODO: Rename and change types and number of parameters
     public static Fragment_Login newInstance(String param1, String param2) {
         Fragment_Login fragment = new Fragment_Login();
@@ -123,6 +125,7 @@ public class Fragment_Login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
+    
     }
 
     @Override
@@ -130,6 +133,7 @@ public class Fragment_Login extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         validarportelefono = view.findViewById(R.id.validarportelefono);
         preferences = getActivity().getSharedPreferences(UserData.Credential,Context.MODE_PRIVATE);
+        auth = FirebaseAuth.getInstance();
 
         validarportelefono.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +143,7 @@ public class Fragment_Login extends Fragment {
         });
 
     }
+   
     private void premission(){
         if (ContextCompat.checkSelfPermission( getActivity() , android.Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED){
@@ -150,7 +155,16 @@ public class Fragment_Login extends Fragment {
                 TelephonyManager mTelephonyManager;
                 mTelephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
                 if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
-                    startActivityForResult(new Intent(getActivity(),Activity_Get_PhoneNum.class),024);
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("Dispositivo Invalido")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+//                    startActivityForResult(new Intent(getActivity(),Activity_Get_PhoneNum.class),024);
                 }else{
                     UserData.Telefono = mTelephonyManager.getLine1Number();
                     if (UserData.Telefono.length()!=13){
@@ -159,7 +173,6 @@ public class Fragment_Login extends Fragment {
                         new telephoneval(UserData.Telefono).execute();
                     }
                 }
-                
             }else{
                 new telephoneval(UserData.Telefono).execute();
             }
@@ -167,7 +180,7 @@ public class Fragment_Login extends Fragment {
 
 
 
-/*
+        /*
             RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             String url_address = UserData.SERVER_ADDRESS+"JSONtelephoneval.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url_address, new Response.Listener<String>() {
@@ -254,8 +267,7 @@ public class Fragment_Login extends Fragment {
                     return params;
                 }
             };
-            requestQueue.add(postRequest);
-*/
+            requestQueue.add(postRequest);*/
 
 
 
@@ -382,6 +394,7 @@ public class Fragment_Login extends Fragment {
                         .setNegativeButton("No", null).show();
                 builder.create();
             }else if (aBoolean==3){
+                
                 final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
                 builder.setMessage("Es necesario activar su cuenta!")
                         .setTitle("Aviso")
@@ -389,11 +402,14 @@ public class Fragment_Login extends Fragment {
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(getActivity(),Activity_Get_ValidationCode.class));
+                                Activity_Get_ValidationCode.Telefono = UserData.Telefono;
+                                startActivity(new Intent(getActivity(),Activity_Get_ValidationCode.class));
                             }
                         }).show();
                 builder.create();
 
+                
+                
             }else if (aBoolean==4){
                 final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
                 builder.setMessage("Su numero no esta vinculado a una cuenta \n ¿Desea crear cuenta ahora?")
@@ -410,25 +426,17 @@ public class Fragment_Login extends Fragment {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+       if (currentUser==null){
+           Log.e("Auth","No user");
+       }
+    }
+    
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

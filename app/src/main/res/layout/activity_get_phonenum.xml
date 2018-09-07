@@ -11,13 +11,13 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="?attr/actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +26,13 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/progress_circle_radius"
+                    android:layout_marginBottom="24dp"
                     android:background="@color/shadow"
                     android:gravity="center"
                     android:paddingLeft="@dimen/progress_circle_radius"
@@ -40,6 +41,7 @@
                     android:textColor="@color/dark_text"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/get_phone_number_telefono"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -48,23 +50,21 @@
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:padding="5dp"
                     android:text="+52"
                     android:textColor="@color/SignUpText"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/get_phone_number_validar"
+                    app:layout_constraintBottom_toBottomOf="@+id/get_phone_number_telefono"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintTop_toTopOf="@+id/get_phone_number_telefono" />
 
                 <Button
                     android:id="@+id/get_phone_number_validar"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="51dp"
                     android:background="@color/colorPrimaryDark"
                     android:text="ENVIAR"
                     android:textColor="@color/TextInPrimary"
@@ -75,18 +75,20 @@
 
                 <EditText
                     android:id="@+id/get_phone_number_telefono"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="32dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"
+
                     android:background="@drawable/round_editssignup"
+
                     android:digits="0123456789"
                     android:ems="7"
-
+                    android:gravity="center"
                     android:hint="Telefono"
-
                     android:inputType="number|phone"
                     android:maxLength="10"
                     android:paddingBottom="5dp"
@@ -95,10 +97,24 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/SignUpText"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textView17"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView19" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="El sistema no ha podido encontrar su numero telefonico por lo que lo necesita proporcionar lo."
                     app:layout_constraintBottom_toTopOf="@+id/get_phone_number_validar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
     </android.support.constraint.ConstraintLayout>

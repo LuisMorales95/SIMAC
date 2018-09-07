@@ -218,7 +218,7 @@ public class Fragment_AlertC extends Fragment {
 			public void onClick(View view) {
 				StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
 				StrictMode.setVmPolicy(builder.build());
-                /*if (getcamara()){
+                /*if (getcamara()){--------------------------------------------------------------------------------------------------------------------++++++++++++++++
                     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                     File file = new File(getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/photo_" + timeStamp + ".png");
                     imageUri = Uri.fromFile(file);
