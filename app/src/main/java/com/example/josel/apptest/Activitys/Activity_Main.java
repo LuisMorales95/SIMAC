@@ -483,7 +483,60 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 			} else if (aBoolean == 2) {
 				
 				progressDialog.dismiss();
-				final SweetAlertDialog sweetAlertDialogLog = new SweetAlertDialog(SuperContext(), SweetAlertDialog.WARNING_TYPE);
+				AlertDialog.Builder builder = new AlertDialog.Builder(main);
+				builder.setTitle("Advertencia");
+				builder.setMessage("Sesión Iniciada en Otro Dispositivo \n Vuelva a Iniciar Sesión en este equipo");
+				builder.setCancelable(false);
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						SETSharedPreferences("TOKEN", "");
+						SETSharedPreferences("IMGUSU", "");
+						SETSharedPreferences("ID", "");
+						SETSharedPreferences("Nombre", "");
+						SETSharedPreferences("Correo", "");
+						SETSharedPreferences("Rol", "");
+						dialog.dismiss();
+						Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+						setSupportActionBar(toolbar);
+						toolbar.setBackgroundResource(R.drawable.gradient);
+						if (bundle == null) {
+							Fragment fragment = null;
+							Class fragmenteclass = null;
+							fragmenteclass = Fragment_AtencionC.class;
+							try {
+								fragment = (Fragment) fragmenteclass.newInstance();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+							getSupportActionBar().setTitle("Alertas");
+						}
+						ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
+						DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+						ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+								Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+						drawer.addDrawerListener(toggle);
+						toggle.syncState();
+						navigationView = findViewById(R.id.nav_view);
+						View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+						if (imageLoader == null)
+							imageLoader = VolleySingleton.getInstance().getImageLoader();
+						Userimage = headerView.findViewById(R.id.userimage);
+						header_name = headerView.findViewById(R.id.header_name);
+						header_email = headerView.findViewById(R.id.header_email);
+						Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+						header_name.setText(GETSharedPreferences("Nombre", ""));
+						header_email.setText(GETSharedPreferences("Correo", ""));
+						navigationView.getMenu().getItem(0).setChecked(true);
+						ocultar_campos();
+						navigationView.setNavigationItemSelectedListener(Activity_Main.this);
+						
+					}
+				});
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();
+				/*final SweetAlertDialog sweetAlertDialogLog = new SweetAlertDialog(SuperContext(), SweetAlertDialog.WARNING_TYPE);
 				sweetAlertDialogLog.setTitle("Advertencia");
 				sweetAlertDialogLog.setContentText("Sesión Iniciada en Otro Dispositivo \n Vuelva a Iniciar Sesión en este equipo");
 				sweetAlertDialogLog.setCancelable(false);
@@ -494,9 +547,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					cerrar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 					cerrar.setTextColor(getResources().getColor(R.color.TextInPrimary));
 					cerrar.setText(" Esta Bien ");
-				}
-				cerrar.setOnClickListener(view -> {
-					SETSharedPreferences("TOKEN", "");
+				}*/
+				/*cerrar.setOnClickListener(view -> {
+					*//*SETSharedPreferences("TOKEN", "");
 					SETSharedPreferences("IMGUSU", "");
 					SETSharedPreferences("ID", "");
 					SETSharedPreferences("Nombre", "");
@@ -537,9 +590,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					navigationView.getMenu().getItem(0).setChecked(true);
 					ocultar_campos();
 					navigationView.setNavigationItemSelectedListener(Activity_Main.this);
-					
+					*//*
 				});
-				
+				*/
 				
 			} else if (aBoolean == 3) {
 				
