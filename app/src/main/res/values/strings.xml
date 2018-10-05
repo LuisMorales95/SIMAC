@@ -21,4 +21,7 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="facebook_app_id">754409018241544</string>
+    <string name="fb_login_protocol_scheme">fb754409018241544</string>
 </resources>

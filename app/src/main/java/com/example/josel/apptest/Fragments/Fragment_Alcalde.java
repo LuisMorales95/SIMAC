@@ -1,5 +1,9 @@
 package com.example.josel.apptest.Fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -35,7 +39,14 @@ public class Fragment_Alcalde extends Fragment {
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
-	
+	private int pics[]={
+			R.drawable.alcalde1,
+			R.drawable.alcalde2,
+			R.drawable.alcalde3,
+			R.drawable.alcalde4,
+			R.drawable.alcalde6,
+			R.drawable.alcalde7,
+			R.drawable.alcalde8};
 	private OnFragmentInteractionListener mListener;
 	
 	public Fragment_Alcalde() {
@@ -87,7 +98,6 @@ public class Fragment_Alcalde extends Fragment {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		
-		
 		ImageView imgbackpro = (ImageView) view.findViewById(R.id.imgalcaldebackground);
 		imgbackpro.getLayoutParams().width = getScreenWidth();
 		imgbackpro.getLayoutParams().height = ((getScreenHeight() / 100) * 30);
@@ -107,9 +117,24 @@ public class Fragment_Alcalde extends Fragment {
 		TextView txtvalcaldedesc = (TextView) view.findViewById(R.id.txtvalcaldedesc);
 		txtvalcaldedesc.setText(UserData.descripalcalde);
 		
+		new Runnable() {
+			int updateInterval = 3000;
+			int ini = 0;
+			@Override
+			public void run() {
+				imgalcaldepic.setImageResource(pics[ini]);
+				imgalcaldepic.postDelayed(this,updateInterval);
+				if (ini==pics.length-1) {
+					ini=0;
+				}else {
+					ini++;
+				}
+			}
+		}.run();
 		
-		new GetImagesURL(imgalcaldepic).execute(UserData.Alcaldepic);
+//		new GetImagesURL(imgalcaldepic).execute(UserData.Alcaldepic);
 		super.onViewCreated(view, savedInstanceState);
+	
 	}
 	
 	// TODO: Rename method, update argument and hook method into UI event

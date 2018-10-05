@@ -33,11 +33,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
 import com.example.josel.apptest.Fragments.Fragment_AdministrarUsuarios;
 import com.example.josel.apptest.Fragments.Fragment_Alcalde;
 import com.example.josel.apptest.Fragments.Fragment_AlertC;
@@ -58,6 +60,8 @@ import com.example.josel.apptest.Methods.UpdateToken;
 import com.example.josel.apptest.Methods.VolleySingleton;
 import com.example.josel.apptest.R;
 import com.example.josel.apptest.UserData;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.http.HttpEntity;
@@ -82,6 +86,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.example.josel.apptest.Methods.SharedPreference.GETSharedPreferences;
 import static com.example.josel.apptest.Methods.SharedPreference.SETSharedPreferences;
 import static com.example.josel.apptest.Methods.VolleySingleton.SuperContext;
+import static com.example.josel.apptest.UserData.Facebook_Picture;
 
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Fragment_FacturaE.OnFragmentInteractionListener, Fragment_AlertC.OnFragmentInteractionListener,
@@ -90,7 +95,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 		Fragment_Reporte.OnFragmentInteractionListener, Fragment_Reportar.OnFragmentInteractionListener, Fragment_MisReporte.OnFragmentInteractionListener,
 		Fragment_Empty.OnFragmentInteractionListener {
 	
-	public static NetworkImageView Userimage;
+	public static ImageView Userimage;
 	public static TextView header_name;
 	public static TextView header_email;
 	public static NavigationView navigationView;
@@ -101,6 +106,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 	private Bundle bundle;
 	
 	public static void ocultar_campos() {
+        navigationView.getMenu().getItem(3).setVisible(false);
+        navigationView.getMenu().getItem(4).setVisible(false);
+        navigationView.getMenu().getItem(6).setVisible(false);
 		if (GETSharedPreferences("Rol", "").equals("1") || GETSharedPreferences("Rol", "").isEmpty()) {
 			navigationView.getMenu().getItem(1).setVisible(false);
 		} else {
@@ -121,7 +129,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 		bundle = savedInstanceState;
 		setContentView(R.layout.activity_main);
 		main = this;
+		
 		new IniciarApp().execute();
+		
 		mAuth = FirebaseAuth.getInstance();
 	}
 	
@@ -238,6 +248,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 			Class fragmenteclass = null;
 			
 			if (id == R.id.Alertas) {
+				
 				fragmenteclass = Fragment_AtencionC.class;
 				getSupportActionBar().setTitle(item.getTitle());
 				
@@ -258,9 +269,10 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 					Snackbar.make(getCurrentFocus(), "Necesita Iniciar sesión", Snackbar.LENGTH_SHORT).show();
 				}
 			} else if (id == R.id.FacturaElectronica) {
+				
 				fragmenteclass = Fragment_Empty.class;
 				getSupportActionBar().setTitle(item.getTitle());
-//                    fragmenteclass = Fragment_FacturaE.class;
+//                fragmenteclass = Fragment_FacturaE.class;
 			
 			} else if (id == R.id.consulta_predial) {
 
@@ -275,18 +287,20 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				
 			} else if (id == R.id.Turismo) {
 				
-				fragmenteclass = Fragment_Turista.class;
+				fragmenteclass = Fragment_Empty.class;
+//				fragmenteclass = Fragment_Turista.class;
 				getSupportActionBar().setTitle(item.getTitle());
 				
 			} else if (id == R.id.CoAlcalde) {
 				
-				fragmenteclass = Fragment_Empty.class;
+				fragmenteclass = Fragment_Alcalde.class;
+//				fragmenteclass = Fragment_Empty.class;
 				getSupportActionBar().setTitle(item.getTitle());
-//                    fragmenteclass = Fragment_Alcalde.class;
 			
 			} else if (id == R.id.NumEmergencia) {
-				getSupportActionBar().setTitle(item.getTitle());
+				
 				fragmenteclass = Fragment_Emergencia.class;
+				getSupportActionBar().setTitle(item.getTitle());
 				
 			} else if (id == R.id.cerrar_Sesion) {
 				final int[] option = {0};
@@ -300,7 +314,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 									.setTitle("Estado")
 									.setCancelable(false)
 									.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-
+										SETSharedPreferences("FacebookID","");
 										SETSharedPreferences("TOKEN", "");
 										SETSharedPreferences("IMGUSU", "");
 										SETSharedPreferences("ID", "");
@@ -308,13 +322,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 										SETSharedPreferences("Correo", "");
 										SETSharedPreferences("Rol", "");
 										UserData.Telefono = "";
+										VolleySingleton.disconnectFromFacebook();
 										mAuth.signOut();
 										invalidateOptionsMenu();
 										ocultar_campos();
 										ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-										if (imageLoader == null)
-											imageLoader = VolleySingleton.getInstance().getImageLoader();
-										Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+										if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
+										Glide.with(Activity_Main.this).load(R.drawable.icon).into(Userimage);
 										Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
 										Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
 										option[0] = 1;
@@ -472,7 +486,11 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				Userimage = headerView.findViewById(R.id.userimage);
 				header_name = headerView.findViewById(R.id.header_name);
 				header_email = headerView.findViewById(R.id.header_email);
-				Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+				if (!GETSharedPreferences("FacebookID","").isEmpty()){
+					Glide.with(Activity_Main.this).load(Facebook_Picture.replace("{facebookId}",GETSharedPreferences("FacebookID",""))).into(Activity_Main.Userimage);
+				}else{
+					Glide.with(Activity_Main.this).load(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", "")).into(Activity_Main.Userimage);
+				}
 				header_name.setText(GETSharedPreferences("Nombre", ""));
 				header_email.setText(GETSharedPreferences("Correo", ""));
 				navigationView.getMenu().getItem(0).setChecked(true);
@@ -525,7 +543,11 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 						Userimage = headerView.findViewById(R.id.userimage);
 						header_name = headerView.findViewById(R.id.header_name);
 						header_email = headerView.findViewById(R.id.header_email);
-						Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+						if (!GETSharedPreferences("FacebookID","").isEmpty()){
+							Glide.with(Activity_Main.this).load(Facebook_Picture.replace("{facebookId}",GETSharedPreferences("FacebookID",""))).into(Activity_Main.Userimage);
+						}else{
+							Glide.with(Activity_Main.this).load(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", "")).into(Activity_Main.Userimage);
+						}
 						header_name.setText(GETSharedPreferences("Nombre", ""));
 						header_email.setText(GETSharedPreferences("Correo", ""));
 						navigationView.getMenu().getItem(0).setChecked(true);
@@ -536,63 +558,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				});
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
-				/*final SweetAlertDialog sweetAlertDialogLog = new SweetAlertDialog(SuperContext(), SweetAlertDialog.WARNING_TYPE);
-				sweetAlertDialogLog.setTitle("Advertencia");
-				sweetAlertDialogLog.setContentText("Sesión Iniciada en Otro Dispositivo \n Vuelva a Iniciar Sesión en este equipo");
-				sweetAlertDialogLog.setCancelable(false);
-				sweetAlertDialogLog.show();
-				Button cerrar = sweetAlertDialogLog.findViewById(cn.pedant.SweetAlert.R.id.confirm_button);
-				if (cerrar != null) {
-					Log.e("Messeage from pdialog", "showErrorMsg: Button view Found yep");
-					cerrar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-					cerrar.setTextColor(getResources().getColor(R.color.TextInPrimary));
-					cerrar.setText(" Esta Bien ");
-				}*/
-				/*cerrar.setOnClickListener(view -> {
-					*//*SETSharedPreferences("TOKEN", "");
-					SETSharedPreferences("IMGUSU", "");
-					SETSharedPreferences("ID", "");
-					SETSharedPreferences("Nombre", "");
-					SETSharedPreferences("Correo", "");
-					SETSharedPreferences("Rol", "");
-					sweetAlertDialogLog.dismiss();
-					Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-					setSupportActionBar(toolbar);
-					toolbar.setBackgroundResource(R.drawable.gradient);
-					if (bundle == null) {
-						Fragment fragment = null;
-						Class fragmenteclass = null;
-						fragmenteclass = Fragment_AtencionC.class;
-						try {
-							fragment = (Fragment) fragmenteclass.newInstance();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-						getSupportActionBar().setTitle("Alertas");
-					}
-					ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-					DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-					ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-							Activity_Main.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-					drawer.addDrawerListener(toggle);
-					toggle.syncState();
-					navigationView = findViewById(R.id.nav_view);
-					View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-					if (imageLoader == null)
-						imageLoader = VolleySingleton.getInstance().getImageLoader();
-					Userimage = headerView.findViewById(R.id.userimage);
-					header_name = headerView.findViewById(R.id.header_name);
-					header_email = headerView.findViewById(R.id.header_email);
-					Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
-					header_name.setText(GETSharedPreferences("Nombre", ""));
-					header_email.setText(GETSharedPreferences("Correo", ""));
-					navigationView.getMenu().getItem(0).setChecked(true);
-					ocultar_campos();
-					navigationView.setNavigationItemSelectedListener(Activity_Main.this);
-					*//*
-				});
-				*/
 				
 			} else if (aBoolean == 3) {
 				
@@ -625,7 +590,11 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 				Userimage = headerView.findViewById(R.id.userimage);
 				header_name = headerView.findViewById(R.id.header_name);
 				header_email = headerView.findViewById(R.id.header_email);
-				Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", ""), imageLoader);
+				if (!GETSharedPreferences("FacebookID","").isEmpty()){
+					Glide.with(Activity_Main.this).load(Facebook_Picture.replace("{facebookId}",GETSharedPreferences("FacebookID",""))).into(Activity_Main.Userimage);
+				}else{
+					Glide.with(Activity_Main.this).load(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", "")).into(Activity_Main.Userimage);
+				}
 				header_name.setText(GETSharedPreferences("Nombre", ""));
 				header_email.setText(GETSharedPreferences("Correo", ""));
 				navigationView.getMenu().getItem(0).setChecked(true);

@@ -49,6 +49,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.josel.apptest.UserData.SERVER_ADDRESS;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +63,7 @@ import java.util.List;
 public class Fragment_Noticias extends Fragment {
 
     private static final String TAG = Activity_Main.class.getSimpleName();
-    private static final String url = UserData.SERVER_ADDRESS+"JSONSelectNoticia.php";
+    private static final String url = SERVER_ADDRESS+"JSONSelectNoticia.php";
     private static ProgressDialog pDialog;
     public List<NoticiaCiudadana> NoticiaCiudadana_lista = new ArrayList<NoticiaCiudadana>();
     ListView listnoticias;
@@ -279,7 +281,7 @@ public class Fragment_Noticias extends Fragment {
             // ++ CONECCION PARA MANDAR LOS PARAMETROS ++
             HttpParams httpRequestParams = HTTPPARAMS.GETHTTPREQUESTPARAMS();
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost("http://201.161.94.229:7777//wpnoticias.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS+"wpnoticias.php");
 
             // ++ RESPONSE FROM SERVER ++
             HttpResponse httpResponse = null;

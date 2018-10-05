@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
 import com.example.josel.apptest.Activitys.Activity_Comments;
 import com.example.josel.apptest.Activitys.Activity_Main;
 import com.example.josel.apptest.Activitys.Activity_NoticiaIndividual;
@@ -55,6 +56,7 @@ import java.util.Objects;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.example.josel.apptest.Methods.SharedPreference.GETSharedPreferences;
+import static com.example.josel.apptest.UserData.Facebook_Picture;
 
 
 /**
@@ -140,11 +142,12 @@ public class Fragment_AtencionC extends Fragment {
         NoticiaCiudadana_lista = new ArrayList<NoticiaCiudadana>();
         successDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE);
         ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
-        if (imageLoader == null)
-            imageLoader = VolleySingleton.getInstance().getImageLoader();
-        Activity_Main.Userimage.setImageUrl(UserData.SERVER_ADDRESS + GETSharedPreferences
-                ("IMGUSU", ""), imageLoader);
-        
+        if (imageLoader == null) imageLoader = VolleySingleton.getInstance().getImageLoader();
+        if (!GETSharedPreferences("FacebookID","").isEmpty()){
+            Glide.with(getActivity()).load(Facebook_Picture.replace("{facebookId}",GETSharedPreferences("FacebookID",""))).into(Activity_Main.Userimage);
+        }else{
+            Glide.with(getActivity()).load(UserData.SERVER_ADDRESS + GETSharedPreferences("IMGUSU", "")).into(Activity_Main.Userimage);
+        }
         
         listView = (ListView) getView().findViewById(R.id.lista_atencionc);
         adapter = new CustomListAdapter(getActivity(), NoticiaCiudadana_lista);

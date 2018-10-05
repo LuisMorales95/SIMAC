@@ -111,14 +111,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 		
 		notificationManager.notify(1, notificationBuilder.build());
 		
-		Intent dialogIntent = new Intent(this, Activity_Notificacion.class);
+		/*Intent dialogIntent = new Intent(this, Activity_Notificacion.class);
 		Bundle bundle = new Bundle();
 		bundle.putString("title", tituloultimo);
 		bundle.putString("mensaje", messageultimo);
 		bundle.putString("dir", direccion);
 		dialogIntent.putExtras(bundle);
 		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(dialogIntent);
+		startActivity(dialogIntent);*/
 	}
 	
 }
