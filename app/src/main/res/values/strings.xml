@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SIMAC</string>
 
+    <string name="ruta_interna">com.Mezda.SIMAC.android.fileprovider</string>
+    <!--<string name="ruta_interna">com.example.josel.apptest.android.fileprovider</string>-->
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

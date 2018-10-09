@@ -5,7 +5,7 @@
     android:id="@+id/subirnumerooutside"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activitys.Activity_SubirNumEmergencia">
+    tools:context="com.Mezda.SIMAC.Activitys.Activity_SubirNumEmergencia">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

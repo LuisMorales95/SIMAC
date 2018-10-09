@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Fragment_Noticias">
+    tools:context="com.Mezda.SIMAC.Fragments.Fragment_Noticias">
 
     <!-- TODO: Update blank fragment layout -->
 

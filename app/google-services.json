@@ -8,18 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:813229968568:android:236614c85cb0c6b5",
+        "mobilesdk_app_id": "1:813229968568:android:bf9c35a6510e3be6",
         "android_client_info": {
-          "package_name": "com.example.josel.apptest"
+          "package_name": "com.Mezda.SIMAC"
         }
       },
       "oauth_client": [
         {
-          "client_id": "813229968568-jaqoakc2v5ld1spku8aftl3v0u1500oc.apps.googleusercontent.com",
+          "client_id": "813229968568-7qpk7jjomi0l9kaqbr8l5l51unsfa2bu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.josel.apptest",
+            "package_name": "com.Mezda.SIMAC",
             "certificate_hash": "b77b8692e282008c725d4dfd51dd8d2883d33541"
+          }
+        },
+        {
+          "client_id": "813229968568-l7mall3dbdl1ei2vskt1qcam4nrcim8k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Mezda.SIMAC",
+            "certificate_hash": "9ee08240dbff77510b7ada1b8dab6f4735fd962c"
           }
         },
         {

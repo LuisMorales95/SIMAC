@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/TextInPrimaryLight"
-    tools:context=".Activitys.Activity_NoticiaMunicipal">
+    tools:context="com.Mezda.SIMAC.Activitys.Activity_NoticiaMunicipal">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/NoticiaMun_Imagen"

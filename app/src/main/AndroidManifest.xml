@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.josel.apptest">
+    package="com.Mezda.SIMAC">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -110,9 +110,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
+        <!--TODO: android:authorities="com.Mezda.SIMAC.android.fileprovider"
+        android:authorities="com.example.josel.apptest.android.fileprovider"-->
+
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.josel.apptest.android.fileprovider"
+            android:authorities="com.Mezda.SIMAC.android.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
