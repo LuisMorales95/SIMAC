@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metodos>
+    <metedo
+        id="01"
+        type="1">
+        <pago>01 Efectivo</pago>
+    </metedo>
+
+    <metedo
+        id="02"
+        type="1">
+        <pago>02 Cheque Nominativo</pago>
+    </metedo>
+
+    <metedo
+        id="03"
+        type="1">
+        <pago>03 Transferencia Electrónica de fondos</pago>
+    </metedo>
+
+    <metedo
+        id="04"
+        type="1">
+        <pago>04 Tarjeta de crédito</pago>
+    </metedo>
+
+    <metedo
+        id="05"
+        type="1">
+        <pago>05 Monedero Electrónico</pago>
+    </metedo>
+
+    <metedo
+        id="06"
+        type="1">
+        <pago>06 Dinero Electrónico</pago>
+    </metedo>
+
+    <metedo
+        id="08"
+        type="1">
+        <pago>08 Vales de despensa</pago>
+    </metedo>
+
+    <metedo
+        id="12"
+        type="1">
+        <pago>12 Dación en pago</pago>
+    </metedo>
+
+    <metedo
+        id="28"
+        type="1">
+        <pago>28 Tarjeta de débito</pago>
+    </metedo>
+
+    <metedo
+        id="29"
+        type="1">
+        <pago>29 Tarjeta de servicio</pago>
+    </metedo>
+
+    <metedo
+        id="99"
+        type="1">
+        <pago>99 Otros</pago>
+    </metedo>
+</metodos>

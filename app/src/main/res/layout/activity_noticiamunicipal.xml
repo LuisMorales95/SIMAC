@@ -7,7 +7,7 @@
     android:background="@color/TextInPrimaryLight"
     tools:context="com.Mezda.SIMAC.Activitys.Activity_NoticiaMunicipal">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/NoticiaMun_Imagen"
         android:layout_width="0dp"
         android:layout_height="280dp"

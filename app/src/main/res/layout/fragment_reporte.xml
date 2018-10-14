@@ -16,11 +16,35 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="@android:dimen/app_icon_size"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/MisReportes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Mis Reportes"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view18"
+                android:layout_width="1px"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark" />
 
             <LinearLayout
                 android:id="@+id/reportetab_"
@@ -41,29 +65,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/view18"
-                android:layout_width="1px"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/MisReportes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Mis Reportes"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
         </LinearLayout>
 
         <FrameLayout
