@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
     <!--
         commented code...
         android:hardwareAccelerated="false"
@@ -110,12 +109,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
-        <!--TODO: android:authorities="com.Mezda.SIMAC.android.fileprovider"
-        android:authorities="com.example.josel.apptest.android.fileprovider"-->
+        <!--
+        TODO: android:authorities="com.Mezda.SIMAC.android.fileprovider"
+        android:authorities="com.example.josel.apptest.android.fileprovider"
+        -->
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.Mezda.SIMAC.android.fileprovider"
+            android:authorities="${applicationId}.android.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -123,27 +124,32 @@
                 android:resource="@xml/filepath" />
         </provider>
 
-        <!--Facebook Login for App maifest info ando String in values\String.xml-->
+        <!-- Facebook Login for App maifest info ando String in values\String.xml -->
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fe2bdce766c420daa74a07dfbf58764f4b107bee"
+            />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-
+        <activity android:name=".Activitys.PDFViewer"></activity>
     </application>
+
 </manifest>

@@ -1,4 +1,4 @@
-package com.Mezda.SIMAC.Methods;
+package com.Mezda.SIMAC.Objects;
 
 public class Reportes {
     

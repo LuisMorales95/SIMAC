@@ -9,9 +9,20 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/Login_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fondologinapp">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/LoginBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@color/TextInPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebookLogin"

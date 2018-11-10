@@ -29,45 +29,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/noticiaescudo"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingTop="@dimen/nav_header_vertical_spacing"
-                android:src="@drawable/wait"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />-->
-            <com.android.volley.toolbox.NetworkImageView
+
+            <ImageView
                 android:id="@+id/noticiaescudo"
                 android:layout_width="1px"
                 android:layout_height="1px"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:scaleType="fitXY"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
                 tools:layout_editor_absoluteX="387dp"
-                tools:layout_editor_absoluteY="8dp" />
+                tools:layout_editor_absoluteY="8dp"
+                tools:ignore="MissingConstraints" />
 
-            <!--<ImageView
-                android:id="@+id/noticiaimg"
-                android:layout_width="367dp"
-                android:layout_height="240dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="80dp"
-                android:background="@android:color/background_light"
-                android:src="@drawable/wait"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />-->
-            <com.android.volley.toolbox.NetworkImageView
+            <ImageView
                 android:id="@+id/noticiaimg"
                 android:layout_width="0dp"
                 android:layout_height="280dp"
@@ -76,7 +49,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--android:scaleType="fitXY"-->
 
             <TextView
                 android:id="@+id/noticiatit"
@@ -113,7 +85,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/noticiausuario"
                 app:layout_constraintStart_toEndOf="@+id/noticiausuario"
                 app:layout_constraintTop_toTopOf="@+id/noticiausuario"
-                app:srcCompat="@drawable/ic_menu_accountsignup" />
+                app:srcCompat="@drawable/ic_menu_accountsignup"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/noticiafecha"
@@ -254,7 +227,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view8"
                 app:layout_constraintTop_toTopOf="@+id/view8"
-                app:srcCompat="@drawable/ic_menu_comment_gray" />
+                app:srcCompat="@drawable/ic_menu_comment_gray"
+                tools:ignore="VectorDrawableCompat" />
 
 
         </android.support.constraint.ConstraintLayout>

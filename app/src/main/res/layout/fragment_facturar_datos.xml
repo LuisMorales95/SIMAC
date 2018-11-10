@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trans"
+    tools:context=".Fragments.Fragment_Facturar_Datos">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="0dp"
+                        android:layout_height="@android:dimen/app_icon_size"
+                        android:background="@color/cardview_shadow_start_color"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:text="DATOS FISCALES"
+                        android:textColor="@color/TextInPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="RAZON SOCIAL"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/DF_RazonSocial"
+                        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                    <EditText
+                        android:id="@+id/DF_RazonSocial"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_editssignup"
+                        android:ems="10"
+                        android:hint="Razon Social"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textColor="@color/SignUpText"
+                        android:textStyle="normal|bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="RFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/DF_RFC"
+                        app:layout_constraintTop_toBottomOf="@+id/DF_RazonSocial" />
+
+                    <EditText
+                        android:id="@+id/DF_RFC"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_editssignup"
+                        android:ems="10"
+                        android:hint="RFC"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textColor="@color/SignUpText"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="DIRECCIÓN"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/DF_Direccion"
+                        app:layout_constraintTop_toBottomOf="@+id/DF_RFC" />
+
+                    <EditText
+                        android:id="@+id/DF_Direccion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_editssignup"
+                        android:ems="10"
+                        android:hint="Dirección"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textColor="@color/SignUpText"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="CORREO"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/DF_Correo"
+                        app:layout_constraintTop_toBottomOf="@+id/DF_Direccion" />
+
+                    <EditText
+                        android:id="@+id/DF_Correo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_editssignup"
+                        android:ems="10"
+                        android:hint="Correo Electrónico"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <Button
+                        android:id="@+id/DF_ActualizarRegistro"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="24dp"
+                        android:background="@drawable/roundcorners"
+                        android:text="ACTUALIZAR REGISTRO"
+                        android:textColor="@color/TextInPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/DF_Correo"
+                        app:layout_constraintStart_toStartOf="@+id/DF_Correo"
+                        app:layout_constraintTop_toBottomOf="@+id/DF_Correo" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView11">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/CFDI_Folio"
+                        android:layout_width="0dp"
+                        android:layout_height="@android:dimen/app_icon_size"
+                        android:background="@color/cardview_shadow_start_color"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:textColor="@color/TextInPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:text="TIPO DE PAGO"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/CFDI_Folio" />
+
+                    <Spinner
+                        android:id="@+id/CFDI_TipoDePago"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_factura_amount"
+                        android:dropDownWidth="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:text="USO CFDI"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/CFDI_TipoDePago" />
+
+                    <Spinner
+                        android:id="@+id/CFDI_UsoCFDI"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_factura_amount"
+                        android:dropDownWidth="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:text="CONCEPTO"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/CFDI_UsoCFDI" />
+
+                    <EditText
+                        android:id="@+id/CFDI_Concepto"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_factura_amount"
+                        android:editable="false"
+                        android:enabled="false"
+                        android:hint="Concepto"
+                        android:inputType="textMultiLine"
+                        android:padding="8dp"
+                        android:singleLine="false"
+                        android:textColor="@color/grey"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/CFDI_Concepto">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView43"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="REZAGOS:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Rezagos"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:editable="false"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView44"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="RECARGOS:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Recargos"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView45"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="CORRIENTE:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Corriente"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$0.0"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView46"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+
+                                    android:text="ADICIONAL:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Adicional"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView41"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="MULTAS:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Multas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView42"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+
+                                    android:text="GASTOS:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Gastos"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView39"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="DESC. 20% ART. 118 " />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Dec20Art118"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView40"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+
+                                    android:text="OTROS:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Otros"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$.00"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView38"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:text="TOTAL:" />
+
+                                <EditText
+                                    android:id="@+id/CFDI_Total"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/round_factura_amount"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:gravity="right|center_vertical"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
+                                    android:text="$0.0"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/CFDI_TotalEscrito"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/round_factura_amount"
+                        android:inputType="textMultiLine"
+                        android:padding="8dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+                    <Button
+                        android:id="@+id/CFDI_GenerarFactura"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:background="@drawable/roundcorners"
+                        android:text="GENERAR FACTURA"
+                        android:textColor="@color/TextInPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/CFDI_TotalEscrito" />
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@android:dimen/app_icon_size"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.527"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView12" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>
