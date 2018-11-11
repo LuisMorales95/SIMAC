@@ -31,6 +31,7 @@
 
     <string name="facebook_app_id">754409018241544</string>
     <string name="fb_login_protocol_scheme">fb754409018241544</string>
+    <string name="fabric">fe2bdce766c420daa74a07dfbf58764f4b107bee</string>
     <string name="AppPDF">application/pdf</string>
     <string name="Whatsapp">com.whatsapp</string>
 </resources>

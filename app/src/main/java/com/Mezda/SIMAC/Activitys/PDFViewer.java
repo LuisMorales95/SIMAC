@@ -36,7 +36,7 @@ public class PDFViewer extends AppCompatActivity {
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.setType(getString(R.string.AppPDF));
                 sendIntent.putExtra(Intent.EXTRA_STREAM, content);
-                sendIntent.setPackage(getString(R.string.Whatsapp));
+                sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(Intent.createChooser(sendIntent, getString(R.string.compartir)));
             }
         });
