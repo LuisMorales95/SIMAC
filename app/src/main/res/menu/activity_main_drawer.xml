@@ -16,11 +16,11 @@
         <item
             android:id="@+id/Danos_tu_reporte"
             android:icon="@drawable/ic_menu_atention"
-            android:title="Danos tu Reporte" />
+            android:title="Reportes" />
         <item
             android:id="@+id/FacturaElectronica"
             android:icon="@drawable/ic_menu_facturaelectronica"
-            android:title="Facturacíon Electronica" />
+            android:title="Facturacíon" />
         <item
             android:id="@+id/consulta_predial"
             android:icon="@drawable/ic_menu_predial"
@@ -28,7 +28,7 @@
         <item
             android:id="@+id/noticias"
             android:icon="@drawable/ic_menu_noticia"
-            android:title="Noticias" />
+            android:title="Noticias Municipales" />
         <item
             android:id="@+id/Turismo"
             android:icon="@drawable/ic_menu_turismo"
@@ -36,7 +36,7 @@
         <item
             android:id="@+id/CoAlcalde"
             android:icon="@drawable/ic_menu_alcalde"
-            android:title="Conoce a tu Alcalde" />
+            android:title="Alcalde" />
         <item
             android:id="@+id/NumEmergencia"
             android:icon="@drawable/ic_menu_emergencia"
