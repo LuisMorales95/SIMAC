@@ -34,10 +34,4 @@
     <string name="fabric">fe2bdce766c420daa74a07dfbf58764f4b107bee</string>
     <string name="AppPDF">application/pdf</string>
     <string name="Whatsapp">com.whatsapp</string>
-    <string name="Folio_notFound">Recibo Inexistente</string>
-    <string name="CDFI_cashed">CDFI ya Generado</string>
-    <string name="Tag_VolleyError">VolleyError</string>
-    <string name="PDOExcepcion">Instrucción de guardado no se ha podido realizar</string>
-    <string name="DataBaseError">No se ha podido guardar en Base de Datos</string>
-    <string name="Saved">Guardado</string>
 </resources>

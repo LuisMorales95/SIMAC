@@ -1,11 +1,29 @@
 package com.Mezda.SIMAC.Objects;
 
 public class Recibo {
-    private String folio, fecha, adicional, corriente, gastos, multas, recargos, rezagos,
-            total, descuento20, descuento50, concepto1, concepto2, concepto3,
-            concepto4, contribuyente, cuentacatastral, cuentacontable, importeletra,
-            estatus, rfc, tipo_predial_o_varios;
-    private String  mSocialReason, mAddress,  mEmail, mPaymentMethod, mElectronicBilling;
+    String
+            folio,
+            fecha,
+            adicional,
+            corriente,
+            gastos,
+            multas,
+            recargos,
+            rezagos,
+            total,
+            descuento20,
+            descuento50,
+            concepto1,
+            concepto2,
+            concepto3,
+            concepto4,
+            contribuyente,
+            cuentacatastral,
+            cuentacontable,
+            importeletra,
+            estatus,
+            rfc,
+            tipo_predial_o_varios;
     
     public Recibo() {
     }
@@ -184,45 +202,5 @@ public class Recibo {
     
     public void setTipo_predial_o_varios(String tipo_predial_o_varios) {
         this.tipo_predial_o_varios = tipo_predial_o_varios;
-    }
-    
-    public String getmSocialReason() {
-        return mSocialReason;
-    }
-    
-    public void setmSocialReason(String mSocialReason) {
-        this.mSocialReason = mSocialReason;
-    }
-    
-    public String getmAddress() {
-        return mAddress;
-    }
-    
-    public void setmAddress(String mAddress) {
-        this.mAddress = mAddress;
-    }
-    
-    public String getmEmail() {
-        return mEmail;
-    }
-    
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
-    }
-    
-    public String getmPaymentMethod() {
-        return mPaymentMethod;
-    }
-    
-    public void setmPaymentMethod(String mPaymentMethod) {
-        this.mPaymentMethod = mPaymentMethod;
-    }
-    
-    public String getmElectronicBilling() {
-        return mElectronicBilling;
-    }
-    
-    public void setmElectronicBilling(String mElectronicBilling) {
-        this.mElectronicBilling = mElectronicBilling;
     }
 }

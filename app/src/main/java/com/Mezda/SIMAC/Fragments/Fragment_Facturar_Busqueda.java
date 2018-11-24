@@ -4,8 +4,11 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
@@ -22,7 +25,9 @@ import android.widget.ImageView;
 import com.Mezda.SIMAC.Activitys.PDFViewer;
 import com.Mezda.SIMAC.BuildConfig;
 import com.Mezda.SIMAC.Methods.FileChooser;
+import com.Mezda.SIMAC.Methods.GenericDialogs;
 import com.Mezda.SIMAC.Objects.Recibo;
+import com.Mezda.SIMAC.Methods.VolleySingleton;
 import com.Mezda.SIMAC.R;
 import com.Mezda.SIMAC.UserData;
 import com.android.volley.DefaultRetryPolicy;
@@ -30,6 +35,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -170,15 +176,10 @@ public class Fragment_Facturar_Busqueda extends Fragment {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            System.out.println(response.toString());
                             progressDialog.dismiss();
-                            if (response.toString().equals("[{\"\":\"not-found\"}]")){
+                            if (response.toString().equals("[]")){
                                 new AlertDialog.Builder(context)
-                                        .setMessage(R.string.Folio_notFound)
-                                        .show();
-                            }else if (response.toString().equals("[{\"\":\"Cashed\"}]")){
-                                new AlertDialog.Builder(context)
-                                        .setMessage(R.string.CDFI_cashed)
+                                        .setMessage("Recibo Inexistente")
                                         .show();
                             }else{
                                 try {
@@ -220,7 +221,6 @@ public class Fragment_Facturar_Busqueda extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e(getResources().getString(R.string.Tag_VolleyError),error.toString());
                             progressDialog.dismiss();
                             new AlertDialog.Builder(context).setMessage(error.toString()).show();
                         }
