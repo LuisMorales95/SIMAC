@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="App_Images" path="Android/data/com.Mezda.SIMAC/files/Pictures"/>
+    <external-path
+        name="App_Images"
+        path="Android/data/com.Mezda.SIMAC/files/Pictures"/>
+    <external-path
+        name="App_Facturas"
+        path="Android/data/com.Mezda.SIMAC/files/Facturas"/>
+    <external-path
+        name="App_Facturados"
+        path="Android/data/com.Mezda.SIMAC/files/Facturados"/>
 </paths>

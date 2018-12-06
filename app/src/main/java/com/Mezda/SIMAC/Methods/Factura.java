@@ -3,6 +3,10 @@ package com.Mezda.SIMAC.Methods;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.Mezda.SIMAC.Fragments.Fragment_Facturar_Busqueda;
+import com.Mezda.SIMAC.Fragments.Fragment_Facturar_Datos;
 import com.Mezda.SIMAC.Objects.Recibo;
 import com.Mezda.SIMAC.R;
 import com.Mezda.SIMAC.UserData;
@@ -19,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -38,14 +45,15 @@ import static com.Mezda.SIMAC.Methods.StaticData.UsoCFDIs;
 import static com.Mezda.SIMAC.Methods.VolleySingleton.*;
 
 public class Factura implements View.OnClickListener {
-    Context context;
-    String password;
-    Recibo recibo;
-    String content;
-    String archivobase64;
-    EditText rfc,nombre,correo,direccion;
-    Spinner usoCDFI, formaPago;
-    ProgressDialog progressDialog;
+    private Context context;
+    private String password;
+    private Recibo recibo;
+    private String content;
+    private String archivobase64;
+    private EditText rfc,nombre,correo,direccion;
+    private Spinner usoCDFI, formaPago;
+    private ProgressDialog progressDialog;
+    private Gson gson;
     public Factura(Context context, String password, Recibo recibo, EditText rfc, EditText nombre, EditText correo, Spinner formaPago, Spinner usoCDFI, EditText Direccion) {
         this.context = context;
         this.password = password;
@@ -56,6 +64,7 @@ public class Factura implements View.OnClickListener {
         this.direccion=Direccion;
         this.usoCDFI=usoCDFI;
         this.formaPago=formaPago;
+        this.gson = new Gson();
     }
     
     @Override
@@ -73,8 +82,17 @@ public class Factura implements View.OnClickListener {
         
                 Log.i("Info-File",FileCreator(recibo));
         archivobase64 = FileToBytes(FileCreator(recibo));
+        recibo.setRfc(rfc.getText().toString());
+        recibo.setmSocialReason(nombre.getText().toString());
+        recibo.setmAddress(direccion.getText().toString());
+        recibo.setmEmail(correo.getText().toString());
+        recibo.setmAddress(direccion.getText().toString());
+        recibo.setmPaymentMethod(MetodoDePagos().get(formaPago.getSelectedItemPosition()).getId());
+        recibo.setmElectronicBilling(UsoCFDIs().get(usoCDFI.getSelectedItemPosition()).getId());
+        String mGsonBill = gson.toJson(recibo);
         if (archivobase64!=null){
             Map<String,String> map = new HashMap<>();
+            map.put("mBill",mGsonBill);
             map.put("Password",password);
             map.put("File64",archivobase64);
             map.put("file_name",recibo.getFolio());
@@ -89,9 +107,32 @@ public class Factura implements View.OnClickListener {
                             progressDialog.dismiss();
     
                             try {
-                                getFileFromBase64AndSaveInSDCard(response.getString("PDF64"),response.getString("NAMEFILE"),"pdf");
-                                getFileFromBase64AndSaveInSDCard(response.getString("XML64"),response.getString("NAMEFILE"),"xml");
-                                new AlertDialog.Builder(context).setMessage(response.getString("MSJ")).show();
+                                if (response.getString("MSJ").contains("Factura timbrada correctamente")){
+                                    getFileFromBase64AndSaveInSDCard(response.getString("PDF64"),response.getString("NAMEFILE"),"pdf");
+                                    getFileFromBase64AndSaveInSDCard(response.getString("XML64"),response.getString("NAMEFILE"),"xml");
+                                    new AlertDialog.Builder(context)
+                                            .setMessage(response.getString("MSJ"))
+                                            .setCancelable(false)
+                                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    ((FragmentActivity)context).getSupportFragmentManager().
+                                                            beginTransaction().replace(R.id.content_Factura,new Fragment_Facturar_Busqueda()).commit();
+                                                }
+                                            }).show();
+                                }else{
+                                    new AlertDialog.Builder(context)
+                                            .setMessage(response.getString("MSJ"))
+                                            .setCancelable(false)
+                                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    ((FragmentActivity)context).getSupportFragmentManager().
+                                                            beginTransaction().replace(R.id.content_Factura,new Fragment_Facturar_Busqueda()).commit();
+                                                }
+                                            }).show();
+                                }
+                                
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -101,7 +142,7 @@ public class Factura implements View.OnClickListener {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressDialog.dismiss();
-                            Log.e("Response: ",error.toString());
+                            Log.e(context.getResources().getString(R.string.Tag_VolleyError),error.toString());
                             new AlertDialog.Builder(context).setMessage(error.toString()).show();
                 
                         }
@@ -112,7 +153,8 @@ public class Factura implements View.OnClickListener {
                     Map<String, String> headers = new HashMap<String, String>();
                     headers.put("Content-Type", "application/json; charset=utf-8");
                     headers.put("Accept", "application/json");
-                    return headers;                }
+                    return headers;
+                }
             };
             request.setRetryPolicy(new DefaultRetryPolicy(10000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -171,61 +213,62 @@ public class Factura implements View.OnClickListener {
         /*+todo target 2018-10-05T11:07:24
          *  todo phone 12/01/2018T08:34:52*/
         return
-                        "[Datos Generales]\n" +
-                                "Version|3.3\n" +
-                                "Serie|AA\n" +
-                                "Folio|"+recibo.getFolio()+"\n" +
-                                "Fecha|"+year+"-"+month+"-"+day+"T"+date_time[1]+"\n"+
-                                "FormaPago|"+FormaPago+"\n" +
-                                "CondicionesDePago|PAGO EN UNA SOLA EXHIBICIÓN\n" +
-                                "Subtotal|"+recibo.getTotal()+"\n" +
-                                "Descuento|"+String.valueOf(Double.valueOf(recibo.getDescuento20())+Double.valueOf(recibo.getDescuento50()))+"\n" +
-                                "Moneda|MXN\n" +
-                                "TipoCambio|1\n" +
-                                "Total|"+recibo.getTotal()+"\n" +
-                                "TipoDeComprobante|I\n"+
-                                "MetodoPago|PUE\n" +
-                                "numCtaPago|\n" +
-                                "LugarExpedicion|96660\n" +
-                                "\n" +
-                                "[DATOS DEL EMISOR]\n" +
-                                "emRfc|AAA010101AAA\n" +
-                                "emNombre|MUNICIPIO DE AGUA DULCE VER\n" +
-                                "emRegimenFiscal|603\n" +
-                                "\n" +
-                                "\n" +
-                                "[DATOS DEL RECEPTOR]\n" +
-                                "reRfc|"+RFC+"\n" +
-                                "reNombre|"+Nombre+"\n" +
-                                "reUsoCFDI|"+UsoCDFI+"\n" +
-                                "reEmail|JOSELUISMORALESP95@GMAIL.COM,"+Correo+"\n" +
-                                "\n" +
-                                "ClaveProdServ|93161700\n" +
-                                "NoIdentificacion|1\n" +
-                                "Cantidad|1\n" +
-                                "ClaveUnidad|ACT\n" +
-                                "Unidad|RECAUDACION\n" +
-                                "Descripcion|"+recibo.getConcepto1()+" "+recibo.getConcepto2()+" "+recibo.getConcepto3()+" "+recibo.getConcepto4()+"\n" +
-                                "ValorUnitario|"+recibo.getCorriente()+"\n" +
-                                "Importe|"+recibo.getCorriente()+"\n" +
-                                "conDescuento|"+String.valueOf(Double.valueOf(recibo.getDescuento20())+Double.valueOf(recibo.getDescuento50()))+"\n" +
-                                "\n" +
-                                "ClaveProdServ|93161700\n" +
-                                "NoIdentificacion|2\n" +
-                                "Cantidad|1\n" +
-                                "ClaveUnidad|ACT\n" +
-                                "Unidad|RECAUDACION\n" +
-                                "Descripcion|ADICIONAL\n" +
-                                "ValorUnitario|"+recibo.getAdicional()+"\n" +
-                                "Importe|"+recibo.getAdicional()+"\n" +
-                                "\n" +
-                                "\n" +
-                                "\n" +
-                                "\n" +
-                                "\n" +
-                                "[EXTRAS]\n" +
-                                "LeyendaEspecial1|"+Direccion+"\n" +
-                                "LeyendaEspecial2|\n";
+            "[Datos Generales]\n" +
+                    "Version|3.3\n" +
+                    "Serie|AD\n" +
+                    "Folio|"+recibo.getFolio()+"\n" +
+                    "Fecha|"+year+"-"+month+"-"+day+"T"+date_time[1]+"\n"+
+                    "FormaPago|"+FormaPago+"\n" +
+                    "CondicionesDePago|PAGO EN UNA SOLA EXHIBICIÓN\n" +
+                    "Subtotal|"+ String.valueOf(Double.valueOf(recibo.getCorriente())+Double.valueOf(recibo.getAdicional()))+"\n" +
+                    "Descuento|"+String.valueOf(Double.valueOf(recibo.getDescuento20())+Double.valueOf(recibo.getDescuento50()))+"\n" +
+                    "Moneda|MXN\n" +
+                    "TipoCambio|1\n" +
+                    "Total|"+recibo.getTotal()+"\n" +
+                    "TipoDeComprobante|I\n"+
+                    "MetodoPago|PUE\n" +
+                    "numCtaPago|\n" +
+                    "LugarExpedicion|96660\n" +
+                    "\n" +
+                    "[DATOS DEL EMISOR]\n" +
+//                    "emRfc|AAA010101AAA\n" +MAD8812014V1
+                    "emRfc|MAD8812014V1\n" +
+                    "emNombre|MUNICIPIO DE AGUA DULCE VER\n" +
+                    "emRegimenFiscal|603\n" +
+                    "\n" +
+                    "\n" +
+                    "[DATOS DEL RECEPTOR]\n" +
+                    "reRfc|"+RFC+"\n" +
+                    "reNombre|"+Nombre+"\n" +
+                    "reUsoCFDI|"+UsoCDFI+"\n" +
+                    "reEmail|JOSELUISMORALESP95@GMAIL.COM,cfdi.aguadulce@gmail.com,"+Correo+"\n" +
+                    "\n" +
+                    "ClaveProdServ|93161700\n" +
+                    "NoIdentificacion|1\n" +
+                    "Cantidad|1\n" +
+                    "ClaveUnidad|ACT\n" +
+                    "Unidad|RECAUDACION\n" +
+                    "Descripcion|"+recibo.getConcepto1()+" "+recibo.getConcepto2()+" "+recibo.getConcepto3()+" "+recibo.getConcepto4()+"\n" +
+                    "ValorUnitario|"+recibo.getCorriente()+"\n" +
+                    "Importe|"+recibo.getCorriente()+"\n" +
+                    "conDescuento|"+String.valueOf(Double.valueOf(recibo.getDescuento20())+Double.valueOf(recibo.getDescuento50()))+"\n" +
+                    "\n" +
+                    "ClaveProdServ|93161700\n" +
+                    "NoIdentificacion|2\n" +
+                    "Cantidad|1\n" +
+                    "ClaveUnidad|ACT\n" +
+                    "Unidad|RECAUDACION\n" +
+                    "Descripcion|ADICIONAL\n" +
+                    "ValorUnitario|"+recibo.getAdicional()+"\n" +
+                    "Importe|"+recibo.getAdicional()+"\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "[EXTRAS]\n" +
+                    "LeyendaEspecial1|"+Direccion+"\n" +
+                    "LeyendaEspecial2|\n";
     }
     
     

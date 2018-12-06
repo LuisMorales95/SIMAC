@@ -5,11 +5,14 @@ import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.telecom.Call;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +24,28 @@ import android.widget.TextView;
 
 import com.Mezda.SIMAC.BuildConfig;
 import com.Mezda.SIMAC.Methods.Factura;
+import com.Mezda.SIMAC.Methods.VolleySingleton;
 import com.Mezda.SIMAC.Objects.Recibo;
 import com.Mezda.SIMAC.R;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.Mezda.SIMAC.Methods.StaticData.MetodoDePagos;
 import static com.Mezda.SIMAC.Methods.StaticData.UsoCFDIs;
+import static com.Mezda.SIMAC.UserData.Factura_JSONUpdateDatosFiscales;
 
 public class Fragment_Facturar_Datos extends Fragment {
     
@@ -121,6 +139,83 @@ public class Fragment_Facturar_Datos extends Fragment {
                         CFDI_TipoDePago,
                         CFDI_UsoCFDI
                         ,DF_Direccion));
+        DF_ActualizarRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,String> params = new HashMap<>();
+                params.put("mRazonSocial",DF_RazonSocial.getText().toString());
+                params.put("mRfc",DF_RFC.getText().toString());
+                params.put("mDireccion",DF_Direccion.getText().toString());
+                params.put("mCorreo",DF_Correo.getText().toString());
+                JSONObject object = new JSONObject(params);
+                VolleySingleton.getInstance().addToRequestQueue(
+                        new JsonObjectRequest(
+                                Request.Method.POST,
+                                Factura_JSONUpdateDatosFiscales,
+                                object,
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            if (response.getString("exito").equals("1")){
+                                                new AlertDialog.Builder(getActivity())
+                                                        .setMessage(R.string.Saved)
+                                                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                                                new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        }).setCancelable(false)
+                                                        .show();
+                                            }else if (response.getString("exito").equals("0")){
+                                                new AlertDialog.Builder(getActivity())
+                                                        .setMessage(R.string.DataBaseError)
+                                                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                                                new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        }).setCancelable(false)
+                                                        .show();
+                                            }else if(response.getString("exito").equals("2")){
+                                                new AlertDialog.Builder(getActivity())
+                                                        .setMessage(R.string.PDOExcepcion)
+                                                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                                                new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        }).setCancelable(false)
+                                                        .show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.e(getResources().getString(R.string.Tag_VolleyError),error.toString());
+                                        new AlertDialog.Builder(getActivity()).setMessage(error.toString()).show();
+                                    }
+                                }
+                        ){
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> headers = new HashMap<String, String>();
+                                headers.put("Content-Type", "application/json; charset=utf-8");
+                                headers.put("Accept", "application/json");
+                                return headers;
+                            }
+                        }.setRetryPolicy(new DefaultRetryPolicy(10000,
+                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
+            }
+        });
         return view;
     }
     
@@ -147,7 +242,7 @@ public class Fragment_Facturar_Datos extends Fragment {
         super.onDetach();
         mListener = null;
     }
-    
+   
     
     
     
