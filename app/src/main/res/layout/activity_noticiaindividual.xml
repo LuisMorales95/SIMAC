@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/TextInPrimaryLight"
-    tools:context="com.Mezda.SIMAC.Activitys.Activity_NoticiaIndividual"
+    tools:context="com.Mezda.SIMAC.mvp_view.Activitys.Activity_NoticiaIndividual"
     tools:ignore="VectorDrawableCompat, ContentDescription, HardcodedText,RtlHardcoded,LabelFor,Deprecated">
 
     <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"

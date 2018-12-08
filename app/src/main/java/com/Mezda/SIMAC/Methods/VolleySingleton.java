@@ -19,8 +19,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import io.fabric.sdk.android.Fabric;
 
-//public class VolleySingleton extends Application {
-	public class VolleySingleton extends Application {
+public class VolleySingleton extends Application {
 	
 	public static final String TAG = VolleySingleton.class.getSimpleName();
 	private static VolleySingleton mInstance;

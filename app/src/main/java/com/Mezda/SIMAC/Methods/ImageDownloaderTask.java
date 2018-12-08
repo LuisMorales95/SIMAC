@@ -88,12 +88,12 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 			 String Contrasena = jsonArray.getJSONObject(0).getString("Contrasenna");
 			 id = jsonArray.getJSONObject(0).getString("id_usuario");
 			 Nombre = jsonArray.getJSONObject(0).getString("Nombre");
-			 App = jsonArray.getJSONObject(0).getString("Ap_paterno");
+			 Application = jsonArray.getJSONObject(0).getString("Ap_paterno");
 			 Apm = jsonArray.getJSONObject(0).getString("Ap_materno");
 			 if(Contrasena.equals(pass)){
 			 Almacen_de_datos.id=id;
 			 Almacen_de_datos.nom=Nombre;
-			 Almacen_de_datos.app=App;
+			 Almacen_de_datos.app=Application;
 			 Almacen_de_datos.apm=Apm;
 			 return true;
 			 }**/
