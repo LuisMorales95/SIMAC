@@ -53,6 +53,9 @@ public class startupValidation {
     @SerializedName("Verificacion_Usuario")
     @Expose
     private String verificacionUsuario;
+    @SerializedName("message")
+    @Expose
+    private String message;
 
     public String getId() {
         return id;
@@ -176,6 +179,14 @@ public class startupValidation {
 
     public String getVerificacionUsuario() {
         return verificacionUsuario;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setVerificacionUsuario(String verificacionUsuario) {

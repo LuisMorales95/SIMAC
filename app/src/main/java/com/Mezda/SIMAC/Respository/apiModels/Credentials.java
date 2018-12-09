@@ -1,10 +1,10 @@
 package com.Mezda.SIMAC.Respository.apiModels;
 
-public class ObjectIdToken {
+public class Credentials {
     String id;
     String Token;
 
-    public ObjectIdToken(String id, String token) {
+    public Credentials(String id, String token) {
         this.id = id;
         Token = token;
     }

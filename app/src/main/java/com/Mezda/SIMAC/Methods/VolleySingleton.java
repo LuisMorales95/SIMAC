@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
+import com.Mezda.SIMAC.root.AppApplication;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -31,7 +32,7 @@ public class VolleySingleton extends Application {
 	}
 	
 	public static Context SuperContext() {
-		return mInstance.getApplicationContext();
+		return AppApplication.provideContext();
 	}
 	
 	@Override

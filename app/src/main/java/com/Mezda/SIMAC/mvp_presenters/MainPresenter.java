@@ -1,35 +1,57 @@
 package com.Mezda.SIMAC.mvp_presenters;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.Mezda.SIMAC.Interfaces.Activity_MainContract;
-import com.Mezda.SIMAC.Respository.apiModels.startupValidation;
-
+import com.Mezda.SIMAC.Respository.apiModels.Credentials;
 import javax.inject.Inject;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.Mezda.SIMAC.Methods.SharedPreference.GETSharedPreferences;
 
 public class MainPresenter implements Activity_MainContract.Presenter{
 
-    @Inject
-    public SharedPreferences preferences;
-
+    private SharedPreferences preferences;
     private Activity_MainContract.Model model;
     private Activity_MainContract.View view;
+    private CompositeDisposable disposable  = new CompositeDisposable();
+    private final String TAG = "MainPresenter";
 
-    public MainPresenter(Activity_MainContract.Model model) {
+    @Inject
+    public MainPresenter(Activity_MainContract.Model model, SharedPreferences preference) {
         this.model = model;
+        this.preferences = preference;
     }
 
     @Override
-    public void setView(Activity_MainContract.View view) {
+    public void attach(Activity_MainContract.View view) {
         this.view = view;
     }
 
     @Override
-    public void startup() {
-
+    public void onDetach() {
+        disposable.clear();
     }
+
+    @Override
+    public void startup() {
+        if (view!=null){
+            Credentials credentials = new Credentials(GETSharedPreferences("ID", "0"),
+                    GETSharedPreferences("TOKEN", "asdasd"));
+
+            disposable.add(model.getUserValidation(credentials).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(obj->{
+                        if (obj.getMessage().isEmpty()){
+                            view.showMessage(obj.getCorreoE());
+                        } else{
+                            view.showMessage(obj.getMessage());
+                        }
+                    },throwable -> Log.i(TAG,"something was wrong: "+throwable.getMessage())));
+        }
+    }
+
 }
