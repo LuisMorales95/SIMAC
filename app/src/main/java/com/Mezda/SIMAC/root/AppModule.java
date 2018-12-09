@@ -10,16 +10,11 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
-    private AppApplication application;
-
-    public AppModule(AppApplication application) {
-        this.application = application;
-    }
 
     @Provides
     @Singleton
     public Context provideContext(){
-        return application;
+        return AppApplication.provideContext();
     }
 
     @Provides

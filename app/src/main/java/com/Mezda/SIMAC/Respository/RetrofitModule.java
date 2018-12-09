@@ -1,8 +1,5 @@
 package com.Mezda.SIMAC.Respository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -10,12 +7,12 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class RetrofitModule {
-    public final String baseUrl = "http://192.168.1.68/SIMACApi/";
+    public final String BSE_URL = "http://www.gsirem.com:8888/SIMACApi/";
 
     @Provides
     @Singleton
@@ -32,13 +29,13 @@ public class RetrofitModule {
                 .baseUrl(baseUrl)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
     @Provides
     @Singleton
     public SimacApi provideSimacApi(){
-        return provideRetrofit(baseUrl,provideClient()).create(SimacApi.class);
+        return provideRetrofit(BSE_URL,provideClient()).create(SimacApi.class);
     }
 }
