@@ -1,10 +1,9 @@
 package com.Mezda.SIMAC.Interfaces;
 
-import com.Mezda.SIMAC.Respository.apiModels.Credentials;
 import com.Mezda.SIMAC.Respository.apiModels.startupValidation;
 
-import io.reactivex.Observable;
-
+import retrofit2.Call;
+import rx.Observable;
 
 public interface Activity_MainContract {
     interface View{
@@ -15,11 +14,11 @@ public interface Activity_MainContract {
         void onStartUpResult(int opcion);
         void showMessage(String Msg);
     }
-    interface Presenter extends BasePresenter<Activity_MainContract.View> {
+    interface Presenter{
+        void setView(View view);
         void startup();
     }
-
     interface Model{
-       Observable<startupValidation> getUserValidation(Credentials credentials);
+       Call<startupValidation> getUserValidation();
     }
 }

@@ -1,9 +1,13 @@
 package com.Mezda.SIMAC.mvp_view.Activitys;
 
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +19,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -23,6 +28,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -33,9 +39,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Mezda.SIMAC.Interfaces.Activity_MainContract;
-import com.Mezda.SIMAC.Respository.apiModels.Credentials;
+import com.Mezda.SIMAC.Respository.SimacApi;
+import com.Mezda.SIMAC.Respository.apiModels.ObjectIdToken;
+import com.Mezda.SIMAC.Respository.apiModels.startupValidation;
 import com.Mezda.SIMAC.mvp_view.Fragments.Fragment_Facturar_Busqueda;
 import com.Mezda.SIMAC.mvp_view.Fragments.Fragment_Facturar_Datos;
+import com.Mezda.SIMAC.root.AppApplication;
 import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
 import com.Mezda.SIMAC.mvp_view.Fragments.Fragment_AdministrarUsuarios;
@@ -70,16 +79,24 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.Mezda.SIMAC.R;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.Mezda.SIMAC.Methods.SharedPreference.GETSharedPreferences;
 import static com.Mezda.SIMAC.Methods.SharedPreference.SETSharedPreferences;
@@ -87,13 +104,12 @@ import static com.Mezda.SIMAC.Methods.VolleySingleton.SuperContext;
 import static com.Mezda.SIMAC.UserData.Facebook_Picture;
 
 
-public class Activity_Main extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, Fragment_FacturaE.OnFragmentInteractionListener, Fragment_AlertC.OnFragmentInteractionListener,
+public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Fragment_FacturaE.OnFragmentInteractionListener, Fragment_AlertC.OnFragmentInteractionListener,
 		Fragment_AtencionC.OnFragmentInteractionListener, Fragment_Alcalde.OnFragmentInteractionListener, Fragment_Noticias.OnFragmentInteractionListener, Fragment_Predial.OnFragmentInteractionListener,
 		Fragment_Turista.OnFragmentInteractionListener, Fragment_Emergencia.OnFragmentInteractionListener, Fragment_Login.OnFragmentInteractionListener, Fragment_AdministrarUsuarios.OnFragmentInteractionListener,
 		Fragment_Reporte.OnFragmentInteractionListener, Fragment_Reportar.OnFragmentInteractionListener, Fragment_MisReporte.OnFragmentInteractionListener,
 		Fragment_Empty.OnFragmentInteractionListener, Fragment_Facturar_Busqueda.OnFragmentInteractionListener, Fragment_Facturar_Datos.OnFragmentInteractionListener,Activity_MainContract.View{
 
-	private static final String TAG = "Activity_Main";
 	public static ImageView Userimage;
 	public static TextView header_name;
 	public static TextView header_email;
@@ -106,39 +122,44 @@ public class Activity_Main extends BaseActivity implements NavigationView.OnNavi
 
 	@Inject
 	public Activity_MainContract.Presenter presenter;
+	@Inject
+	SimacApi simacApi;
 
+	@SuppressLint("StaticFieldLeak")
 	@Override
-	public int getLayout() {
-		return R.layout.activity_main;
-	}
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		bundle = savedInstanceState;
+		setContentView(R.layout.activity_main);
+		((AppApplication)getApplicationContext()).provideComponent().inject(this);
+		presenter.startup();
 
-	@Override
-	public void loadComponents() {
+
+		Call<startupValidation> validationCall = simacApi.getStartUp(new ObjectIdToken("1","d9912d72a83c4fda79fe096667927b1e"));
+		validationCall.enqueue(new Callback<startupValidation>() {
+			@Override
+			public void onResponse(Call<startupValidation> call, Response<startupValidation> response) {
+				Log.d(this.getClass().getName(),response.body().getCorreoE());
+				showMessage(response.body().getCorreoE());
+			}
+
+			@Override
+			public void onFailure(Call<startupValidation> call, Throwable t) {
+				Log.e(this.getClass().getName(),t.getMessage());
+                showMessage(t.getMessage());
+			}
+		});
+		/*main = this;
+		new IniciarApp().execute();*/
+		
 		mAuth = FirebaseAuth.getInstance();
-	}
-	public static String objToJsonString(Credentials idToken){
-		try {
-			String json = new Gson().toJson(idToken);
-			Log.i(TAG,json);
-			return json;
-		} catch (Exception ex){
-			ex.getMessage();
-		}
-		return "";
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		presenter.attach(this);
-		presenter.startup();
+		presenter.setView(this);
 
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		presenter.onDetach();
 	}
 
 	@Override

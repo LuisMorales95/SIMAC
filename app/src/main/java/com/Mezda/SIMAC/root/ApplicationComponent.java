@@ -7,10 +7,9 @@ import com.Mezda.SIMAC.mvp_view.Activitys.Activity_Main;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import dagger.android.AndroidInjector;
 
 @Singleton
 @Component(modules = {AppModule.class, MainModule.class,RetrofitModule.class})
-public interface ApplicationComponent extends AndroidInjector<AppApplication> {
-
+public interface ApplicationComponent {
+    void inject(Activity_Main activity_main);
 }
