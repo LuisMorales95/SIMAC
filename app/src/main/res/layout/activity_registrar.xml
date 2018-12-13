@@ -8,7 +8,7 @@
     android:foregroundGravity="center_horizontal"
     android:scrollbarAlwaysDrawHorizontalTrack="true"
     android:scrollbars="none"
-    tools:context="com.Mezda.SIMAC.mvp_view.Activitys.Activity_Registrar"
+    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Registrar"
     tools:ignore="VectorDrawableCompat, ContentDescription, HardcodedText,RtlHardcoded,LabelFor,Deprecated">
 
     <!--<HorizontalScrollView

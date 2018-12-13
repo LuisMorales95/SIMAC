@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:ignore="VectorDrawableCompat, ContentDescription, HardcodedText,RtlHardcoded,LabelFor,Deprecated"
 
-    tools:context=".mvp_view.Fragments.Fragment_Alcalde">
+    tools:context=".pending.Fragments.Fragment_Alcalde">
 
     <!-- TODO: Update blank fragment layout -->
 

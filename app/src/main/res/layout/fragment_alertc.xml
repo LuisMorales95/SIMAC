@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     tools:ignore="VectorDrawableCompat, ContentDescription, HardcodedText,RtlHardcoded,LabelFor,Deprecated"
-    tools:context=".mvp_view.Fragments.Fragment_AlertC">
+    tools:context=".pending.Fragments.Fragment_AlertC">
 
     <!-- TODO: Update blank fragment layout -->
 

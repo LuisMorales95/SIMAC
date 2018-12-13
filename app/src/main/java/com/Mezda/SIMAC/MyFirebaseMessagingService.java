@@ -12,7 +12,7 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
-import com.Mezda.SIMAC.mvp_view.Activitys.Activity_Main;
+import com.Mezda.SIMAC.ui.main.Activity_Main;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

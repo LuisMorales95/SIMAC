@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".mvp_view.Fragments.Fragment_FacturaE">
+    tools:context=".pending.Fragments.Fragment_FacturaE">
 
     <!-- TODO: Update blank fragment layout -->
 

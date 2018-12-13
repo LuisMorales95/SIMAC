@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/float_transparent"
-    tools:context="com.Mezda.SIMAC.mvp_view.Activitys.Activity_Privilegios">
+    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Privilegios">
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"

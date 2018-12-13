@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.Mezda.SIMAC.mvp_view.Activitys.Activity_Maps">
+    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Maps">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

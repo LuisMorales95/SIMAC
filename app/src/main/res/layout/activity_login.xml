@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.Mezda.SIMAC.mvp_view.Activitys.Activity_Login">
+    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Login">
 
     <View
         android:id="@+id/view6"
