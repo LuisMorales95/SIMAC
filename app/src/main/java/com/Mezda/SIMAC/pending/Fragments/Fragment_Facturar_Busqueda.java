@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.Mezda.SIMAC.pending.Activitys.PDFViewer;
+import com.Mezda.SIMAC.pending.Activities.PDFViewer;
 import com.Mezda.SIMAC.BuildConfig;
 import com.Mezda.SIMAC.utils.FileChooser;
 import com.Mezda.SIMAC.data.dao.Recibo;

@@ -22,10 +22,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.Mezda.SIMAC.ui.main.Activity_Main;
+import com.Mezda.SIMAC.ui.activities.main.Activity_Main;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.Mezda.SIMAC.pending.Activitys.Activity_Privilegios;
+import com.Mezda.SIMAC.pending.Activities.Activity_Privilegios;
 import com.Mezda.SIMAC.utils.HTTPPARAMS;
 import com.Mezda.SIMAC.utils.VolleySingleton;
 import com.Mezda.SIMAC.data.dao.LosUsuarios;

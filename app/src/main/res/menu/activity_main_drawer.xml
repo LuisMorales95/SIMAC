@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/Alertas"
+            android:id="@+id/LocalFeed"
             android:icon="@drawable/ic_menu_atencion"
             android:title="Alertas" />
         <item
-            android:id="@+id/Alertar_Ciudadania"
+            android:id="@+id/Alerts"
             android:icon="@drawable/ic_menu_alert"
             android:title="Alertar Ciudadania"
             />

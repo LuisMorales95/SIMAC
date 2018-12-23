@@ -49,7 +49,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="User Name"
-                android:textColor="@color/dark_text"
+                android:textColor="@color/darkText"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Correoe"
-                android:textColor="@color/comentario_text_color"
+                android:textColor="@color/commentTextColorDark"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/itemusuarioimg"
                 app:layout_constraintTop_toBottomOf="@+id/itemusuarioname" />
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:text="Telefono"
-                android:textColor="@color/comentario_text_color"
+                android:textColor="@color/commentTextColorDark"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/itemusuarioimg"
                 app:layout_constraintStart_toEndOf="@+id/itemusuarioimg" />

@@ -27,16 +27,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.Mezda.SIMAC.ui.fragments.localNewsFeed.LocalNewsFragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.Mezda.SIMAC.pending.Activitys.Activity_Get_PhoneNum;
-import com.Mezda.SIMAC.pending.Activitys.Activity_Get_ValidationCode;
-import com.Mezda.SIMAC.ui.main.Activity_Main;
-import com.Mezda.SIMAC.pending.Activitys.Activity_Registrar;
+import com.Mezda.SIMAC.pending.Activities.Activity_Get_PhoneNum;
+import com.Mezda.SIMAC.pending.Activities.Activity_Get_ValidationCode;
+import com.Mezda.SIMAC.ui.activities.main.Activity_Main;
+import com.Mezda.SIMAC.pending.Activities.Activity_Registrar;
 import com.Mezda.SIMAC.utils.HTTPPARAMS;
 import com.Mezda.SIMAC.utils.UpdateToken;
 import com.Mezda.SIMAC.utils.VolleySingleton;
@@ -77,7 +78,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
-import static com.Mezda.SIMAC.utils.SharedPreference.GETSharedPreferences;
 import static com.Mezda.SIMAC.utils.SharedPreference.SETSharedPreferences;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -94,7 +94,7 @@ public class Fragment_Login extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private final int PHONERQUESTPERCODE = 1002;
-    Fragment_AtencionC fragmentAtencionC = new Fragment_AtencionC();
+    LocalNewsFragment fragmentAtencionC = new LocalNewsFragment();
     
     @BindView(R.id.LoginBackground)
     ImageView loginbackground;
@@ -313,9 +313,9 @@ public class Fragment_Login extends Fragment {
                     SETSharedPreferences("Nombre", DataBase_Name);
                     SETSharedPreferences("Correo", DataBase_email);
                     SETSharedPreferences("Rol", DataBase_Rol);
-                    Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
-                    Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
-                    Activity_Main.navigationView.getMenu().getItem(0).setChecked(true);
+//                    Activity_Main.header_name.setText(GETSharedPreferences("Nombre", ""));
+//                    Activity_Main.header_email.setText(GETSharedPreferences("Correo", ""));
+//                    Activity_Main.navigationView.getMenu().getItem(0).setChecked(true);
                     getActivity().invalidateOptionsMenu();
 //                    Activity_Main.ocultar_campos();
                     new UpdateToken(FirebaseInstanceId.getInstance().getToken()).execute();
@@ -584,9 +584,9 @@ public class Fragment_Login extends Fragment {
         protected void onPostExecute(Integer aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean == 1) {
-                Activity_Main.header_name.setText(preferences.getString("Nombre", ""));
-                Activity_Main.header_email.setText(preferences.getString("Correo", ""));
-                Activity_Main.navigationView.getMenu().getItem(0).setChecked(true);
+//                Activity_Main.header_name.setText(preferences.getString("Nombre", ""));
+//                Activity_Main.header_email.setText(preferences.getString("Correo", ""));
+//                Activity_Main.navigationView.getMenu().getItem(0).setChecked(true);
                 getActivity().invalidateOptionsMenu();
 //                Activity_Main.ocultar_campos();
                 new UpdateToken(FirebaseInstanceId.getInstance().getToken()).execute();

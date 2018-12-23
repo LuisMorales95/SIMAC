@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Notificacion">
+    tools:context="com.Mezda.SIMAC.pending.Activities.Activity_Notificacion">
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="TextView"
-                android:textColor="@color/dark_text"
+                android:textColor="@color/darkText"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

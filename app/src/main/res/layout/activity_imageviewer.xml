@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/TextInPrimaryLight"
-    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_ImageViewer">
+    tools:context="com.Mezda.SIMAC.pending.Activities.Activity_ImageViewer">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/imagevista"

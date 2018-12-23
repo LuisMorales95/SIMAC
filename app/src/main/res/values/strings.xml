@@ -40,4 +40,5 @@
     <string name="PDOExcepcion">Instrucción de guardado no se ha podido realizar</string>
     <string name="DataBaseError">No se ha podido guardar en Base de Datos</string>
     <string name="Saved">Guardado</string>
+    <string name="userInformationSaved">User information saved</string>
 </resources>

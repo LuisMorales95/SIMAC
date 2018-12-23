@@ -4,6 +4,7 @@
     package="com.Mezda.SIMAC">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -17,7 +18,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-        android:name=".di.AppApplication"
+        android:name=".di.SimacApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +29,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".ui.main.Activity_Main"
+            android:name=".ui.activities.main.Activity_Main"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -40,63 +41,69 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".pending.Activitys.Activity_Login"
+            android:name=".pending.Activities.Activity_Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".pending.Activitys.Activity_NoticiaIndividual"
+            android:name=".ui.activities.detailArticle.Activity_DetailArticle"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".pending.Activitys.Activity_Registrar"
+            android:name=".pending.Activities.Activity_Registrar"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".pending.Activities.Activity_NoticiaMunicipal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.Map.Activity_Maps"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pending.Activities.Activity_ImageViewer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pending.Activities.Activity_Comments"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.Activity_Privilegios"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.Activity_SubirNumEmergencia"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.Activity_Notificacion"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.Activity_Get_PhoneNum"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.Activity_Get_ValidationCode"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".pending.Activities.PDFViewer"
+            android:screenOrientation="portrait"
+            />
 
-        <!-- [START firebase_service] -->
+
+
+        <!-- FireBase Services-->
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- [END firebase_service] -->
-
-        <activity
-            android:name=".pending.Activitys.Activity_NoticiaMunicipal"
-            android:screenOrientation="portrait" />
+        <!--Google Maps
+        :for Debug use the String
+        :for Release use the actual ApiKey
+        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA4AItvVMbOr2sRIz6FSiYi7TsPYsw3NUY" />
-
-        <activity
-            android:name=".pending.Activitys.Activity_Maps"
-            android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".pending.Activitys.Activity_ImageViewer"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".pending.Activitys.Activity_Comments"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".pending.Activitys.Activity_Privilegios"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".pending.Activitys.Activity_SubirNumEmergencia"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".pending.Activitys.Activity_Notificacion"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".pending.Activitys.Activity_Get_PhoneNum"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".pending.Activitys.Activity_Get_ValidationCode"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-
-
+            android:value="@string/google_maps_key" />
+        <!--File provider-->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.android.fileprovider"
@@ -106,16 +113,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepath" />
         </provider>
-
-         <meta-data
+        <!--Facebook Components-->
+        <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="fe2bdce766c420daa74a07dfbf58764f4b107bee"
-            />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -125,14 +126,19 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".pending.Activitys.PDFViewer"></activity>
+
+        <!--Fabric Components-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fe2bdce766c420daa74a07dfbf58764f4b107bee" />
+
+
+
     </application>
 
 </manifest>

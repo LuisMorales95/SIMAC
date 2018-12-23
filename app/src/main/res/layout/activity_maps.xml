@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_Maps">
+    tools:context="com.Mezda.SIMAC.ui.activities.Map.Activity_Maps">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,8 +30,9 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/roundcorners"
-            android:text="Listo"
+            android:background="@drawable/roundcorner"
+            android:text="Ready"
+            android:visibility="gone"
             android:textColor="@color/TextInPrimary"
             android:textStyle="bold"
             map:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +40,13 @@
             map:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/MapActivity_Inst"
+            android:id="@+id/MapActivity_Instructions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/common_google_signin_btn_text_light_pressed"
             android:padding="16dp"
-            android:text="TextView"
+            android:visibility="gone"
+            tools:text="Hold an Drag to set a new position"
             android:textColor="@color/TextInPrimary"
             android:textStyle="bold"
             map:layout_constraintBottom_toBottomOf="parent"

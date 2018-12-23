@@ -1,5 +1,7 @@
 package com.Mezda.SIMAC.data.network;
 
+import com.Mezda.SIMAC.data.dao.Article;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,7 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class RetrofitModule {
-    public final String BSE_URL = "http://www.gsirem.com:8888/SIMACApi/";
+    private final String mBaseUrl="http://192.168.1.68/SIMACApi/";
+
+
+
+    @Provides @Singleton
+    GsonConverterFactory providesGsonConverterFactory(){
+        return GsonConverterFactory.create();
+    }
+
+    @Provides @Singleton
+    RxJava2CallAdapterFactory providesRxJava2CallAdapterFactory(){
+        return RxJava2CallAdapterFactory.create();
+    }
 
     @Provides
     @Singleton
@@ -24,18 +38,24 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(String baseUrl, OkHttpClient client){
+    public Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory gsonConverterFactory,
+                                    RxJava2CallAdapterFactory rxJava2CallAdapterFactory){
         return new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(mBaseUrl)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .build();
     }
 
     @Provides
     @Singleton
-    public SimacApi provideSimacApi(){
-        return provideRetrofit(BSE_URL,provideClient()).create(SimacApi.class);
+    public SimacApi provideSimacApi(Retrofit retrofit){
+        return retrofit.create(SimacApi.class);
+    }
+
+    @Provides @Singleton
+    public Article providesArticle(){
+        return new Article();
     }
 }

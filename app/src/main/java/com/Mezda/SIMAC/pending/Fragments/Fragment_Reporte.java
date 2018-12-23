@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.Mezda.SIMAC.ui.main.Activity_Main;
+import com.Mezda.SIMAC.ui.activities.main.Activity_Main;
 import com.Mezda.SIMAC.R;
 
 

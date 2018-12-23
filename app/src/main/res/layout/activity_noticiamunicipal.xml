@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/TextInPrimaryLight"
-    tools:context="com.Mezda.SIMAC.pending.Activitys.Activity_NoticiaMunicipal">
+    tools:context="com.Mezda.SIMAC.pending.Activities.Activity_NoticiaMunicipal">
 
     <ImageView
         android:id="@+id/NoticiaMun_Imagen"

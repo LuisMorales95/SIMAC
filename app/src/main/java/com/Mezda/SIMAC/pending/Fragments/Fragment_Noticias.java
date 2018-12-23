@@ -22,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.Mezda.SIMAC.data.dao.Article;
 import com.android.volley.toolbox.ImageLoader;
-import com.Mezda.SIMAC.ui.main.Activity_Main;
+import com.Mezda.SIMAC.ui.activities.main.Activity_Main;
 import com.Mezda.SIMAC.utils.HTTPPARAMS;
 import com.Mezda.SIMAC.utils.VolleySingleton;
 import com.Mezda.SIMAC.utils.HTMLSimplifier;
-import com.Mezda.SIMAC.pending.Activitys.Activity_NoticiaMunicipal;
-import com.Mezda.SIMAC.data.dao.NoticiaCiudadana;
+import com.Mezda.SIMAC.pending.Activities.Activity_NoticiaMunicipal;
 import com.Mezda.SIMAC.R;
 import com.bumptech.glide.Glide;
 
@@ -66,7 +66,7 @@ public class Fragment_Noticias extends Fragment {
     private static final String TAG = Activity_Main.class.getSimpleName();
     private static final String url = SERVER_ADDRESS+"JSONSelectNoticia.php";
     private static ProgressDialog pDialog;
-    public List<NoticiaCiudadana> NoticiaCiudadana_lista = new ArrayList<NoticiaCiudadana>();
+    public List<Article> article_lista = new ArrayList<Article>();
     ListView listnoticias;
     private CustomListAdapter adapter;
 
@@ -81,7 +81,7 @@ public class Fragment_Noticias extends Fragment {
     public View ftView;
     public Handler mHandler;
 
-    public static List<NoticiaCiudadana> items;
+    public static List<Article> items;
 
     int numero =0;
 
@@ -121,7 +121,7 @@ public class Fragment_Noticias extends Fragment {
         listnoticias = (ListView) getView().findViewById(R.id.listnoticias);
 
 
-        adapter = new CustomListAdapter(getActivity(),NoticiaCiudadana_lista);
+        adapter = new CustomListAdapter(getActivity(), article_lista);
         listnoticias.setAdapter(adapter);
 
 
@@ -135,15 +135,15 @@ public class Fragment_Noticias extends Fragment {
         ftView = li.inflate(R.layout.footer_view, null);
 
         /*
-        new jalar_noticias(view.getRootView(), String.valueOf(numero),url,NoticiaCiudadana_lista).execute();
+        new jalar_noticias(view.getRootView(), String.valueOf(numero),url,mArticleList).execute();
         */
-        new jalar_noticias2(view.getRootView(), String.valueOf(numero),url,NoticiaCiudadana_lista).execute();
+        new jalar_noticias2(view.getRootView(), String.valueOf(numero),url, article_lista).execute();
 
         listnoticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 startActivity(new Intent(getActivity(),Activity_NoticiaMunicipal.class));
-                Activity_NoticiaMunicipal.noticiaCiudadana=NoticiaCiudadana_lista.get(position);
+                Activity_NoticiaMunicipal.article = article_lista.get(position);
             }
         });
 
@@ -179,13 +179,13 @@ public class Fragment_Noticias extends Fragment {
         View rootview;
         String numero;
         String url;
-        List<NoticiaCiudadana> NoticiaCiudadana_lista;
+        List<Article> article_lista;
 
-        public jalar_noticias2(View rootview, String numero, String url, List<NoticiaCiudadana> noticiaCiudadana) {
+        public jalar_noticias2(View rootview, String numero, String url, List<Article> localNews) {
             this.rootview = rootview;
             this.numero = numero;
             this.url = url;
-            NoticiaCiudadana_lista = noticiaCiudadana;
+            article_lista = localNews;
         }
 
         @Override
@@ -209,16 +209,16 @@ public class Fragment_Noticias extends Fragment {
                 responsedecoded = EntityUtils.toString(httpEntity,"UTF-8");
                 JSONArray jsonArray = new JSONArray(responsedecoded);
                 for (int i = 0; i<jsonArray.length();i++){
-                    NoticiaCiudadana NoticiaCiudadana = new NoticiaCiudadana();
-                    NoticiaCiudadana.setTitulo(jsonArray.getJSONObject(i).getString("Titulo"));
-                    NoticiaCiudadana.setDescripcion(jsonArray.getJSONObject(i).getString("Contenido"));
-                    NoticiaCiudadana.setFecha(jsonArray.getJSONObject(i).getString("FechaPub"));
+                    Article Article = new Article();
+                    Article.setHeadline(jsonArray.getJSONObject(i).getString("Titulo"));
+                    Article.setContent(jsonArray.getJSONObject(i).getString("Contenido"));
+                    Article.setDate(jsonArray.getJSONObject(i).getString("FechaPub"));
                     if (jsonArray.getJSONObject(i).getString("Foto").equals("")){
-                        NoticiaCiudadana.setNoticiaimagen("http://www.conexiatravel.com.ar/images/default.jpg");
+                        Article.setImage("http://www.conexiatravel.com.ar/images/default.jpg");
                     }else{
-                        NoticiaCiudadana.setNoticiaimagen(jsonArray.getJSONObject(i).getString("Foto"));
+                        Article.setImage(jsonArray.getJSONObject(i).getString("Foto"));
                     }
-                    NoticiaCiudadana_lista.add(NoticiaCiudadana);
+                    article_lista.add(Article);
                 }
                 httpEntity.consumeContent();
                 if (jsonArray.length()>=0){
@@ -271,7 +271,7 @@ public class Fragment_Noticias extends Fragment {
                     break;
                 case 1:
                     //Update data adapter and UI
-                      adapter.addListItemToAdapter((ArrayList<NoticiaCiudadana>)msg.obj);
+                      adapter.addListItemToAdapter((ArrayList<Article>)msg.obj);
                     //Remove loading view after update listview
                     //listnoticias.removeFooterView(ftView);
                     isLoading=false;
@@ -281,8 +281,8 @@ public class Fragment_Noticias extends Fragment {
             }
         }
     }
-    private ArrayList<NoticiaCiudadana> getMoreData() {
-        ArrayList<NoticiaCiudadana>lst = new ArrayList<>();
+    private ArrayList<Article> getMoreData() {
+        ArrayList<Article>lst = new ArrayList<>();
         return lst;
     }
     public class ThreadGetMoreData extends Thread {
@@ -291,7 +291,7 @@ public class Fragment_Noticias extends Fragment {
             //Add footer view after get data
             mHandler.sendEmptyMessage(0);
             //Search more data
-            ArrayList<NoticiaCiudadana> lstResult = getMoreData();
+            ArrayList<Article> lstResult = getMoreData();
             //Delay time to show loading footer when debug, remove it when release
             /*try {
                 Thread.sleep(3000);
@@ -338,27 +338,27 @@ public class Fragment_Noticias extends Fragment {
     public class CustomListAdapter extends BaseAdapter {
         private Activity activity;
         private LayoutInflater inflater;
-        private List<NoticiaCiudadana> NoticiaCiudadana;
+        private List<Article> Article;
         ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
-        public CustomListAdapter(Activity activity, List<NoticiaCiudadana> NoticiaCiudadana) {
+        public CustomListAdapter(Activity activity, List<Article> Article) {
             this.activity = activity;
-            this.NoticiaCiudadana = NoticiaCiudadana;
+            this.Article = Article;
         }
-        public void addListItemToAdapter(List<NoticiaCiudadana> list) {
+        public void addListItemToAdapter(List<Article> list) {
             //Add list to current array list of data
-            NoticiaCiudadana.addAll(list);
+            Article.addAll(list);
             //Notify UI
             this.notifyDataSetChanged();
         }
         @Override
         public int getCount() {
-            return NoticiaCiudadana.size();
+            return Article.size();
         }
 
         @Override
         public Object getItem(int location) {
-            return NoticiaCiudadana.get(location);
+            return Article.get(location);
         }
 
         @Override
@@ -380,13 +380,13 @@ public class Fragment_Noticias extends Fragment {
             TextView municipio_descripcion = (TextView) convertView.findViewById(R.id.municipio_descripcion);
             TextView municipio_fecha = (TextView) convertView.findViewById(R.id.municipio_fecha);
     
-            NoticiaCiudadana m = NoticiaCiudadana.get(position);
+            Article m = Article.get(position);
             
-            Glide.with(convertView).load(m.getNoticiaimagen()).into(municipio_imagen);
+            Glide.with(convertView).load(m.getImage()).into(municipio_imagen);
 
-            municipio_titulo.setText(m.getTitulo());
-            municipio_descripcion.setText(HTMLSimplifier.eliminadorHTML(m.getDescripcion()));
-            municipio_fecha.setText(m.getFecha());
+            municipio_titulo.setText(m.getHeadline());
+            municipio_descripcion.setText(HTMLSimplifier.eliminadorHTML(m.getContent()));
+            municipio_fecha.setText(m.getDate());
             
             return convertView;
         }

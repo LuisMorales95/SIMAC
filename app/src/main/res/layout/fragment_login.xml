@@ -51,7 +51,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:background="@drawable/roundcorners"
+            android:background="@drawable/roundcorner"
             android:padding="8dp"
             android:text="Telefono"
             android:textColor="@color/TextInPrimary"

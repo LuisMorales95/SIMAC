@@ -24,4 +24,8 @@ public class Credentials {
     public void setToken(String token) {
         Token = token;
     }
+
+    public boolean isEmpty(){
+        return (this.id.isEmpty()&&this.Token.isEmpty());
+    }
 }

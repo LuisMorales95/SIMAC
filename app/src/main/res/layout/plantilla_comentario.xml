@@ -28,7 +28,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="lonut Zamfir"
-        android:textColor="@color/dark_text"
+        android:textColor="@color/darkText"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/comentario_description"
@@ -46,7 +46,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:text="Looks awesome :)"
-        android:textColor="@color/comentario_text_color"
+        android:textColor="@color/commentTextColorDark"
         app:layout_constraintBottom_toTopOf="@+id/comentario_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView14" />
@@ -59,7 +59,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:text="4 months ago"
-        android:textColor="@color/date_color"
+        android:textColor="@color/dateColor"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView14" />

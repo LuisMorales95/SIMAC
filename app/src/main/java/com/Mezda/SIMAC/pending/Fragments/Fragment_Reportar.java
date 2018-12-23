@@ -36,7 +36,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Mezda.SIMAC.pending.Activitys.Activity_Maps;
+import com.Mezda.SIMAC.ui.activities.Map.Activity_Maps;
 import com.Mezda.SIMAC.utils.HTTPPARAMS;
 import com.Mezda.SIMAC.R;
 
@@ -355,7 +355,7 @@ public class Fragment_Reportar extends Fragment {
 				ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION);
 		} else {
-			Activity_Maps.opcion = 2;
+//			Activity_Maps.opcion = 2;
 			startActivity(new Intent(getActivity(), Activity_Maps.class));
 		}
 	}
