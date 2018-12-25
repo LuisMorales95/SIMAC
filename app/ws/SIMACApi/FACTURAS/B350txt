@@ -1,0 +1,55 @@
+[Datos Generales]
+Version|3.3
+Serie|AA
+Folio|B350
+Fecha|2018-01-12T08:34:52
+FormaPago|01
+CondicionesDePago|PAGO EN UNA SOLA EXHIBICIÓN
+Subtotal|759.00
+Descuento|0.0
+Moneda|MXN
+TipoCambio|1
+Total|759.00
+TipoDeComprobante|I
+MetodoPago|PUE
+numCtaPago|
+LugarExpedicion|96660
+
+[DATOS DEL EMISOR]
+emRfc|AAA010101AAA
+emNombre|MUNICIPIO DE AGUA DULCE VER
+emRegimenFiscal|603
+
+
+[DATOS DEL RECEPTOR]
+reRfc|XAXX010101000
+reNombre|VENTA AL PUBLICO EN GENERAL
+reUsoCFDI|P01
+reEmail|JOSELUISMORALESP95@GMAIL.COM,Joseluismoralesp95@gmail.com
+
+ClaveProdServ|93161700
+NoIdentificacion|1
+Cantidad|1
+ClaveUnidad|ACT
+Unidad|RECAUDACION
+Descripcion|ACTIVIDADES DE EMPRESAS O ESTABLECIMIENTOS. PAGA REFRENDO ANUAL AÑO 2018 GIRO: ANTOJITOS 
+ValorUnitario|690.00
+Importe|690.00
+conDescuento|0.0
+
+ClaveProdServ|93161700
+NoIdentificacion|2
+Cantidad|1
+ClaveUnidad|ACT
+Unidad|RECAUDACION
+Descripcion|ADICIONAL
+ValorUnitario|69.00
+Importe|69.00
+
+
+
+
+
+[EXTRAS]
+LeyendaEspecial1|CIUDAD PEMEX 103 COLONIA CUATRO CAMINOS
+LeyendaEspecial2|
