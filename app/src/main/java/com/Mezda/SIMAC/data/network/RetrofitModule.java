@@ -17,7 +17,6 @@ public class RetrofitModule {
     private final String mBaseUrl="http://192.168.1.68/SIMACApi/";
 
 
-
     @Provides @Singleton
     GsonConverterFactory providesGsonConverterFactory(){
         return GsonConverterFactory.create();
